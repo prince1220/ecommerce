@@ -11,6 +11,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Cart from "./pages/Cart";
 import Navbar2 from "./components/Navbar2";
+import Navbar  from "./components/Navbar";
 /*
 npm install [name]
 
