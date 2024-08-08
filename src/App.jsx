@@ -12,6 +12,8 @@ import Contact from './pages/Contact';
 import Cart from "./pages/Cart";
 import Navbar2 from "./components/Navbar2";
 import Navbar  from "./components/Navbar";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 /*
 npm install [name]
 
@@ -55,8 +57,8 @@ export default function App() {
         <Route path="/about" element={<About  />} />
         <Route path="/" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
         <Route path="/home" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
-       <Route path="/cart" element={<Cart cards={cards} orders={orders} setOrders={setOrders} />}/>
-
+        <Route path="/cart" element={<Cart cards={cards} orders={orders} setOrders={setOrders} />}/>
+        <Route path="/contact" element={<Contact TextField={TextField} Box={Box}/>}/>
        <Route path="*" element={<>Not found</>} />
      
       </Routes>
@@ -73,7 +75,7 @@ export default function App() {
 
       <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
       <CardList  cards={cards} pricesRange={pricesRange}  searchQ={searchQ} orders={orders} setOrders={setOrders}/>
-     
+       <TextField Box={Box}/>
      </div>
     </main>
   );
