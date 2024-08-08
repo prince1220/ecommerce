@@ -31,8 +31,10 @@ const Contact = () => {
           noValidate
           autoComplete="off"
         >
+          <TextField id="outlined-basic" label="Name" variant="outlined" />
           <TextField id="outlined-basic" label="Email" variant="outlined" />
         </Box>
+        
 
         <Box
           component="form"
@@ -40,7 +42,7 @@ const Contact = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            mt: 4,
+            mt: 0,
             '& > :not(style)': { m: 3, width: '75ch', height: '50ch' },
           }}
           noValidate
