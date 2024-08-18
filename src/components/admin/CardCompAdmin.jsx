@@ -7,6 +7,8 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
 ///react code  => printing the card
 //how the react code can decicde if the item is in cart or not?!
 
@@ -44,6 +46,7 @@ export default function CardCompAdmin({setOrders,orders,id, name, description, p
         <Typography variant="h5" component="div">
           {name}
         </Typography>
+        <DeleteOutlineIcon/>
 
         <Typography color="text.secondary" variant="body2">
           {description}
@@ -55,40 +58,10 @@ export default function CardCompAdmin({setOrders,orders,id, name, description, p
         </Typography>
       
 
-        {isAvailable && !isInCart && <Button onClick={()=>{
-           ///what will happen when we click the button
-           setOrders((old_orders)=>{
-              if(old_orders.find(item=>item==id))   ///order already placed
-              {
-                return old_orders
-              }else{
-                return [...old_orders,id]
-              }
-           })
-
-        }}  color="warning" variant="contained" size="small">
-        Add
-        </Button>}
         
-
-       
-
-
-
-        {isAvailable && isInCart && <Button onClick={()=>{
-           ///what will happen when we click the button
-           setOrders((old_orders)=>{
-              return old_orders.filter(item=>item!=id)
-           })
-
-        }}  color="info" variant="contained" size="small">
-        Remove
-        </Button>}
-
-       
-       
-       
-        <Link to={"/product/"+id}> <Button>View</Button> </Link>
+   
+       {/*TO-DO - add product edit page  */}
+        <Link to={"/edit/"+id}> <Button>View</Button> </Link>
 
 
       </CardActions>

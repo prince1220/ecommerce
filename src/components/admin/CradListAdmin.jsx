@@ -12,7 +12,7 @@ export default function CardListAdmin({cards,pricesRange,orders,setOrders,search
     justifyContent:"start",
     columnGap:2
     }}>
-
+{/*TODO create a table to visiual/edit list of items, using grids Material ui*/}
     {cards.filter(card=>{
         
       let price=Number(card.price.substring(1))
