@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -31,6 +32,8 @@ export default function CardComp({setOrders,orders,id, name, description, price,
     color="green"
   }
   return (
+
+   
     <Box sx={{ minWidth: 275, width: 200 ,margin:4 }}>
       <Card variant="outlined">
       <React.Fragment>
@@ -85,14 +88,14 @@ export default function CardComp({setOrders,orders,id, name, description, price,
        
        
        
-      
+        <Link to={"/product/"+id}> <Button>View</Button> </Link>
 
 
       </CardActions>
     </React.Fragment>
        
       </Card>
-    </Box>
+    </Box> 
   );
 }
 

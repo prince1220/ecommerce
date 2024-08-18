@@ -7,6 +7,14 @@ import {Button} from '@mui/material';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import MenuItem from '@mui/material/MenuItem';
 import { Typography } from '@mui/material';
+
+import { styled } from '@mui/material/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+
+
+
 const pages = [{name:'Products',route:"/"}, {name:'Contact',route:"/contact"}, {name:'Cart',route:"/cart"}, {name:'About',route:"/about"}];
 
 export default function Navbar2({cards,orders,setOrders}) {
@@ -30,7 +38,7 @@ export default function Navbar2({cards,orders,setOrders}) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
- 
+ /*TODO style the navbar */
   return (
     <div>
 
