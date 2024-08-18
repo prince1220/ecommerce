@@ -15,6 +15,7 @@ import Navbar  from "./components/Navbar";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Product from "./pages/Product";
+import Admin from "./pages/Admin";
 /*
 npm install [name]
 
@@ -65,12 +66,13 @@ export default function App() {
         
       <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About  />} />
+        <Route path="/admin" element={<Admin/>}/>
         <Route path="/" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
         <Route path="/home" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
         <Route path="/cart" element={<Cart cards={cards} orders={orders} setOrders={setOrders} />}/>
         <Route path="/contact" element={<Contact TextField={TextField} Box={Box}/>}/>
         <Route path="/product/:id" element={<Product cards={cards} orders={orders} setOrders={setOrders} />}/>
-      
+        
        <Route path="*" element={<>Not found</>} />
      
       </Routes>
