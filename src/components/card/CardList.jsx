@@ -3,7 +3,7 @@ import Card from "./CardComp"
 export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
 
   return (
-    <div style={{border:"2px solid red",
+    <div style={{border:"none",
     width:"100%",
     display:"flex",
     flexDirection:"row",
@@ -23,7 +23,7 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
      if(!card.name.includes(searchQ) && !card.description.includes(searchQ)) return <></>
     
      
-     return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
+     return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} img={card.img} isAvailable={card.isAvailable=="true"}   />
     })}
 
 

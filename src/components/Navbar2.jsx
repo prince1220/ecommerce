@@ -1,31 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
-import {Menu } from '@mui/material';
+import { Menu } from '@mui/material';
 import Badge from '@mui/material/Badge';
-import {Button} from '@mui/material';
+import { Button } from '@mui/material';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import MenuItem from '@mui/material/MenuItem';
 import { Typography } from '@mui/material';
-
-import { styled } from '@mui/material/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
+const pages = [{ name: 'Products', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
 
-
-const pages = [{name:'Products',route:"/"}, {name:'Contact',route:"/contact"}, {name:'Cart',route:"/cart"}, {name:'About',route:"/about"}];
-
-export default function Navbar2({cards,orders,setOrders}) {
+export default function Navbar2({ cards, orders, setOrders }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -34,59 +26,75 @@ export default function Navbar2({cards,orders,setOrders}) {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
- /*TODO style the navbar */
+
   return (
-    <div>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between', // Distributes space evenly between items
+        alignItems: 'center',
+        padding: '0 20px', // Adds some padding on the left and right
+        height: '10vh', // Optional: adjust the height of the navbar
+        backgroundColor: '#f8f9fa', // Optional: add a background color to the navbar
+      }}
+    >
+      {/* Empty Box for spacing (optional) */}
+      <Box sx={{ flexGrow: 1 }} />
 
-      {pages.map(page=>{
-        return <Link to={page.route}>{page.name}</Link>
-      })}
+      {/* Links */}
+      <Box sx={{ display: 'flex', gap: 2 }}>
+        {pages.map((page) => (
+          <Link key={page.name} to={page.route} style={{ textDecoration: 'none', color: 'inherit', margin: '0 10px' }}>
+            {page.name}
+          </Link>
+        ))}
+      </Box>
 
-      <div>
-      <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={orders.length} color="error">
-                <ShoppingCartSharpIcon />
-              </Badge>
-            </IconButton>
+      {/* Cart Icon */}
+      <Box>
+        <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show cart items" color="inherit">
+          <Badge badgeContent={orders.length} color="error">
+            <ShoppingCartSharpIcon />
+          </Badge>
+        </IconButton>
 
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {orders.map((order) => {
-            
-                const card=cards.find(item=>item.id==order)
-            
-               return <MenuItem key={order} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"> {card.name} - {card.price} <Button onClick={()=>{
-                    setOrders((old_orders)=>{
-                      //[1,2,3,5]   ///5
-                      return old_orders.filter(item=>item !=order)
-                    })
-                  }}> Delete</Button></Typography>
-                </MenuItem>
-              
-            })}
-            </Menu>
-
-
-      </div>
-    </div>
-  )
+        <Menu
+          sx={{ mt: '45px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {orders.map((order) => {
+            const card = cards.find(item => item.id === order);
+            return (
+              <MenuItem key={order} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">
+                  {card.name} - {card.price}
+                  <Button onClick={() => {
+                    setOrders((oldOrders) => oldOrders.filter(item => item !== order));
+                  }}>
+                    Delete
+                  </Button>
+                </Typography>
+              </MenuItem>
+            );
+          })}
+        </Menu>
+      </Box>
+    </Box>
+  );
 }

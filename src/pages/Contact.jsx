@@ -43,22 +43,25 @@ const Contact = () => {
               color: '#757575', 
             }}
           >
-            <Typography variant="h6" gutterBottom>
-              <h1>Contact Information</h1>
+            <Typography variant="h5"   sx={{
+              color: 'black', 
+            }} gutterBottom>
+              <h5>Contact Information</h5>
+            
             </Typography>
             <Typography variant="body1">
               works_wear@shop.com
             </Typography>
-            <Typography variant="body1" sx={{ mt: 2 }}>
-             <h1>Return Policy</h1>
+            <Typography variant="body1" sx={{color: 'black', mt: 2 }}>
+             <h5>Return Policy</h5>
             </Typography>
             <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-               irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
-               nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
-               qui officia deserunt mollit anim id est laborum."
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat 
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
+            qui officia deserunt mollit anim id est laborum."
             </Typography>
           </Box>
         </Grid>
@@ -113,7 +116,7 @@ const Contact = () => {
         <Typography variant="body2" color="text.secondary" align="center">
           {'Copyright © '}
           <Link color="inherit" href="https://mui.com/">
-            Your Website
+            WORKS
           </Link>{' '}
           {new Date().getFullYear()}
           {'.'}

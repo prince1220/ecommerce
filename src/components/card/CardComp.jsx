@@ -17,7 +17,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 
 
-export default function CardComp({setOrders,orders,id, name, description, price, isAvailable }) {
+export default function CardComp({setOrders,orders,id, name, description, price, isAvailable, img }) {
 
   let isInCart = (orders.find(item=>item==id) != undefined)
   let label,color
