@@ -19,16 +19,13 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 
 
-export default function CardCompAdmin({setOrders,orders,id, name, description, price, isAvailable }) {
+export default function CardCompAdmin({setCards,cards,id, name, description, price, isAvailable }) {
 
-  let isInCart = (orders.find(item=>item==id) != undefined)
+  
   let label,color
   if(!isAvailable){
     label="Sold out"
     color="orange"
-  }else if(isInCart){
-    label="In-Cart"
-    color="red"
   }else{
     label="Available"
     color="green"
@@ -46,7 +43,9 @@ export default function CardCompAdmin({setOrders,orders,id, name, description, p
         <Typography variant="h5" component="div">
           {name}
         </Typography>
-        <DeleteOutlineIcon/>
+        <DeleteOutlineIcon onClick={()=>{
+        setCards(cards.filter(item=>item.id != id))
+        }}/>
 
         <Typography color="text.secondary" variant="body2">
           {description}

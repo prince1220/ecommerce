@@ -30,7 +30,7 @@ export default function App() {
 
   
   const [searchQ,setSearchQ]=useState(""); /// input change
-
+  {/*TODO (hard / critical) replace cards , setCards into products ,setProducts*/}
   const [cards,setCards] = useState([]) ///loading API
   const [orders,setOrders] = useState([])
   const [pricesRange, setPricesRange] = useState([500,2000]);
@@ -66,7 +66,7 @@ export default function App() {
         
       <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About  />} />
-        <Route path="/admin" element={<Admin cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>}/>
+        <Route path="/admin" element={<Admin cards={cards} setCards={setCards} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>}/>
         <Route path="/" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
         <Route path="/home" element={<Home cards={cards} orders={orders} setOrders={setOrders} setSearchQ={searchQ} setPricesRange={setPricesRange} pricesRange={pricesRange} searchQ={searchQ}/>} />
         <Route path="/cart" element={<Cart cards={cards} orders={orders} setOrders={setOrders} />}/>

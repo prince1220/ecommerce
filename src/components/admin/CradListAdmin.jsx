@@ -1,6 +1,6 @@
 
 import Card from "./CardCompAdmin.jsx"
-export default function CardListAdmin({cards,pricesRange,orders,setOrders,searchQ}) {
+export default function CardListAdmin({cards,setCards,pricesRange,searchQ}) {
 
   return (
     <div style={{border:"2px solid red",
@@ -23,7 +23,7 @@ export default function CardListAdmin({cards,pricesRange,orders,setOrders,search
      if(!card.name.includes(searchQ) && !card.description.includes(searchQ)) return <></>
     
      
-     return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
+     return <Card setCards={setCards} cards={cards} id={card.id} name={card.name} description={card.description} price={card.price} isAvailable={card.isAvailable=="true"}   />
     })}
 
 
