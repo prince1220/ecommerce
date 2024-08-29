@@ -8,52 +8,54 @@ function About() {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' }, // Stack vertically on small screens, horizontally on larger screens
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
         padding: '20px',
+        textAlign: { xs: 'center', sm: 'left' }, // Center text on small screens, left-align on larger screens
       }}
     >
+      {/* Image Component on the left */}
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'row', // Align image and text horizontally
-          alignItems: 'center',
-          textAlign: 'left', // Align text to the left
-          maxWidth: '80%', // Limits the width of the entire content
+          marginRight: { sm: '20px', xs: 0 }, // Margin on the right only for larger screens
+          marginBottom: { xs: '20px', sm: 0 }, // Margin at the bottom only for small screens
         }}
       >
-        {/* Image Component on the left */}
-        <Box sx={{ marginRight: '20px' }}>
-          <img
-            src="https://via.placeholder.com/300" // Replace with your image URL
-            alt="Description of the image"
-            style={{ width: '300px', height: '500px', borderRadius: '8px' }}
-          />
-        </Box>
+        <img
+          src="https://via.placeholder.com/300" // Replace with your image URL
+          alt="Description of the image"
+          style={{
+            width: '100%', // Make image responsive
+            maxWidth: '300px', // Limit the maximum width of the image
+            height: '500px', // Maintain aspect ratio
+            borderRadius: '8px',
+            
+          }}
+        />
+      </Box>
 
-        {/* Text Content on the right */}
-        <Box>
-          <Typography variant="h5" sx={{ marginBottom: '10px', color: 'black', maxWidth: '600px' }}>
-            culpa qui officia deserunt mollitia animi, 
-            id est labo Nam libero tempore, cum soluta nobis.
-          </Typography>
-          <Typography variant="body1" sx={{ color: 'grey', maxWidth: '600px' }}>
-            At vero eos et accusamus et iusto odio dignissimos
-            ducimus qui blanditiis praesentium voluptatum deleniti
-            atque corrupti quos dolores et quas molestias excepturi
-            sint occaecati cupiditate non provident, similique sunt
-            in culpa qui officia deserunt mollitia animi, id est laborum
-            et dolorum fuga. Et harum quidem rerum facilis est et expedita
-            distinctio. Nam libero tempore, cum soluta nobis est eligendi
-            optio cumque nihil impedit quo minus id quod maxime placeat fa
-            Et harum quidem rerum facilis est et expedita distinctio. Nam
-            libero tempore, cum soluta nobis est eligendi optio cumque nihil
-            impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
-            assumenda est, omnis dolor repellendus. Temporibus autem quibusdam
-            et aut officiis debitis
-          </Typography>
-        </Box>
+      {/* Text Content on the right */}
+      <Box sx={{ maxWidth: '600px' }}>
+        <Typography variant="h6" sx={{ marginBottom: '10px', color: 'black' }}>
+          culpa qui officia deserunt mollitia animi, id est labo Nam libero tempore, cum soluta nobis.
+        </Typography>
+        <Typography variant="body1" sx={{ color: 'grey' }}>
+          At vero eos et accusamus et iusto odio dignissimos
+          ducimus qui blanditiis praesentium voluptatum deleniti
+          atque corrupti quos dolores et quas molestias excepturi
+          sint occaecati cupiditate non provident, similique sunt
+          in culpa qui officia deserunt mollitia animi, id est laborum
+          et dolorum fuga. Et harum quidem rerum facilis est et expedita
+          distinctio. Nam libero tempore, cum soluta nobis est eligendi
+          optio cumque nihil impedit quo minus id quod maxime placeat fa
+          Et harum quidem rerum facilis est et expedita distinctio. Nam
+          libero tempore, cum soluta nobis est eligendi optio cumque nihil
+          impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
+          assumenda est, omnis dolor repellendus. Temporibus autem quibusdam
+          et aut officiis debitis
+        </Typography>
       </Box>
 
       {/* Copyright at the bottom */}

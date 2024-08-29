@@ -5,6 +5,7 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
   return (
     <div style={{border:"none",
     width:"100%",
+    
     display:"flex",
     flexDirection:"row",
     flexWrap:"wrap",
