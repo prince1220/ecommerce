@@ -25,7 +25,7 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
   }
 
   return (
-    <Box sx={{ minWidth: 300, width: 300, height: 600, margin: 20 }}>
+    <Box sx={{ minWidth: 300, width: 300, height: 600, margin: 10, paddingLeft: 10}}>
       <Card variant="outlined">
         <React.Fragment>
           {/* Image Component */}

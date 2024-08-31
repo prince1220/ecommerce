@@ -9,6 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
+// Import your logo image
+import logo from '../logo.png'; // Adjust the path as needed
+
 const pages = [{ name: 'Products', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
 
 export default function Navbar2({ cards, orders, setOrders }) {
@@ -42,8 +45,12 @@ export default function Navbar2({ cards, orders, setOrders }) {
         backgroundColor: '#f8f9fa', // Optional: add a background color to the navbar
       }}
     >
-      {/* Empty Box for spacing (optional) */}
-      <Box sx={{ flexGrow: 1 }} />
+      {/* Logo */}
+      <Box>
+        <Link to="/">
+          <img src={logo} alt="Logo" style={{ height: '50px' }} />
+        </Link>
+      </Box>
 
       {/* Links */}
       <Box sx={{ display: 'flex', gap: 2 }}>

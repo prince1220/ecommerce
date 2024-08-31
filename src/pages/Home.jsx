@@ -9,8 +9,6 @@ function Home({cards,orders,setOrders,searchQ,setSearchQ,setPricesRange,pricesRa
   
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
       <CardList cards={cards} orders={orders} setOrders={setOrders} pricesRange={pricesRange} searchQ={searchQ} />
       <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
       

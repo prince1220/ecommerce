@@ -11,7 +11,7 @@ const CardDetails = ({ orders }) => {
     name: "Trippie Tee",
     price: "$35",
     img: "https://i.ibb.co/jvfBFzY/Untitled-2-03.png",
-    // isAvailable: true,
+    isAvailable: true,
     
 
   };
@@ -23,7 +23,7 @@ const CardDetails = ({ orders }) => {
       <h1>{card.name}</h1>
       <p>{card.price}</p>
       <p>{card.img}</p>
-      {/* <p>Status: {card.isAvailable ? "Available" : "Sold Out"}</p> */}
+      <p>Status: {card.isAvailable ? "Available" : "Sold Out"}</p>
       {orders.includes(parseInt(id)) && <p>This item is in your cart.</p>}
     </div>
   );
