@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import '@fontsource-variable/source-code-pro';
 
 function About() {
   return (
@@ -13,6 +14,7 @@ function About() {
         justifyContent: 'center',
         height: '100vh',
         padding: '20px',
+        fontFamily: "'Source Code Pro Variable', monospace", // Correct font-family syntax
         textAlign: { xs: 'center', sm: 'left' }, // Center text on small screens, left-align on larger screens
       }}
     >
@@ -24,24 +26,30 @@ function About() {
         }}
       >
         <img
-          src="https://via.placeholder.com/300" // Replace with your image URL
-          alt="Description of the image"
-          style={{
-            width: '100%', // Make image responsive
-            maxWidth: '300px', // Limit the maximum width of the image
-            height: '500px', // Maintain aspect ratio
-            borderRadius: '8px',
-            
-          }}
-        />
+  src="https://i.ibb.co/QrMwCgd/about.jpg" // Replace with your image URL
+  alt="Description of the image"
+  style={{
+    width: '100%', // Make image responsive
+    maxWidth: '300px', // Limit the maximum width of the image
+    height: '500px', // Set the height of the container
+    borderRadius: '8px',
+    objectFit: 'cover', // Ensures the image covers the container while maintaining its aspect ratio
+    objectPosition: 'center', // Center the image within the container
+  }}
+/>
+
       </Box>
 
       {/* Text Content on the right */}
-      <Box sx={{ maxWidth: '600px' }}>
-        <Typography variant="h6" sx={{ marginBottom: '10px', color: 'black' }}>
+      <Box sx={{ 
+        fontFamily: "'Source Code Pro Variable', monospace", // Correct font-family syntax
+        maxWidth: '600px' }}>
+        <Typography variant="h6" sx={{ fontFamily: "'Source Code Pro Variable', monospace", marginBottom: '10px', color: 'black' }}>
           culpa qui officia deserunt mollitia animi, id est labo Nam libero tempore, cum soluta nobis.
         </Typography>
-        <Typography variant="body1" sx={{ color: 'grey' }}>
+        <Typography
+        variant="body1" sx={{
+          fontFamily: "'Source Code Pro Variable', monospace", color: 'grey' }}>
           At vero eos et accusamus et iusto odio dignissimos
           ducimus qui blanditiis praesentium voluptatum deleniti
           atque corrupti quos dolores et quas molestias excepturi

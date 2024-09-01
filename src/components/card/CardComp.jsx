@@ -8,24 +8,34 @@ import CardMedia from "@mui/material/CardMedia"; // Import CardMedia for image h
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { grey } from "@mui/material/colors";
 
 export default function CardComp({ setOrders, orders, id, name, description, price, isAvailable, img }) {
   let isInCart = orders.find(item => item === id) !== undefined;
   let label, color;
 
-  if (!isAvailable) {
-    label = "Sold out";
-    color = "orange";
-  } else if (isInCart) {
-    label = "In-Cart";
-    color = "red";
-  } else {
-    label = "Available";
-    color = "green";
-  }
+  // if (!isAvailable) {
+  //   label = "Sold out";
+  //   color = "orange";
+  // } else if (isInCart) {
+  //   label = "In-Cart";
+  //   color = "red";
+  // } else {
+  //   label = "Available";
+  //   color = "green";
+  // }
 
   return (
-    <Box sx={{ minWidth: 300, width: 300, height: 600, margin: 10, paddingLeft: 10}}>
+    <Box
+      sx={{
+        minWidth: 300,
+        width: 400,
+        height: 600,
+        margin: 10,
+        paddingLeft: 23,
+        fontFamily: "'Source Code Pro Variable', monospace", // Apply font family to the entire card
+      }}
+    >
       <Card variant="outlined">
         <React.Fragment>
           {/* Image Component */}
@@ -36,13 +46,21 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
             alt={name} // Use the name prop for the alt text
             sx={{
               objectFit: "contain", // Ensures the image covers the container without distortion
-              width: "100%",       // Ensures the image takes up the full width of the container
+              width: "100%", // Ensures the image takes up the full width of the container
             }}
           />
           
           <CardContent>
-            <Typography sx={{ fontSize: 10, display: "flex", alignItems: "center" }} color="text.secondary" gutterBottom>
-              {label} <FiberManualRecordIcon style={{ color: color, height: 50, width: 10 }} />
+            <Typography
+              sx={{
+                fontSize: 10,
+                display: "flex",
+                alignItems: "center",
+              }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {/* {label} <FiberManualRecordIcon style={{ color: grey, height: 50, width: 10 }} /> */}
             </Typography>
             <Typography variant="h7" component="div">
               {name}
@@ -55,12 +73,12 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
             <Typography color="#fffff" variant="h8">
               {price}
             </Typography>
-
+  
             {isAvailable && !isInCart && (
               <Button
                 onClick={() => {
                   setOrders((old_orders) => {
-                    if (old_orders.find(item => item === id)) {
+                    if (old_orders.find((item) => item === id)) {
                       return old_orders;
                     } else {
                       return [...old_orders, id];
@@ -74,12 +92,12 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
                 Add
               </Button>
             )}
-
+  
             {isAvailable && isInCart && (
               <Button
                 onClick={() => {
                   setOrders((old_orders) => {
-                    return old_orders.filter(item => item !== id);
+                    return old_orders.filter((item) => item !== id);
                   });
                 }}
                 color="info"
@@ -89,7 +107,7 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
                 Remove
               </Button>
             )}
-
+  
             <Link to={"/product/" + id}>
               <Button>View</Button>
             </Link>
@@ -98,4 +116,4 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
       </Card>
     </Box>
   );
-}
+ }  

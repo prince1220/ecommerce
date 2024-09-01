@@ -1,3 +1,4 @@
+
 import "./App.css";
 import Card from "./components/card/CardComp.jsx";
 import {useState,useEffect} from "react"
@@ -16,6 +17,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Product from "./pages/Product";
 import Admin from "./pages/Admin";
+import '@fontsource-variable/source-code-pro';
 /*
 npm install [name]
 

@@ -13,6 +13,7 @@ const DisableElevation = () => {
       variant="contained"
       disableElevation
       sx={{
+        fontFamily: "'Source Code Pro Variable', monospace",
         backgroundColor: '#FFFFFF', // Background color
         color: '#757575', // Text color
         border: '1px solid #757575', // Outline color and thickness
@@ -44,18 +45,21 @@ const Contact = () => {
             }}
           >
             <Typography variant="h5"   sx={{
+              fontFamily: "'Source Code Pro Variable', monospace",
               color: 'black', 
             }} gutterBottom>
+              
               <h5>Contact Information</h5>
             
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" sx={{ fontFamily: "'Source Code Pro Variable', monospace"}} >
               works_wear@shop.com
             </Typography>
-            <Typography variant="body1" sx={{color: 'black', mt: 2 }}>
+            <Typography variant="body1" sx={{ fontFamily: "'Source Code Pro Variable', monospace", color: 'black', mt: 2 }}>
              <h5>Return Policy</h5>
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1"sx={{ fontFamily: "'Source Code Pro Variable', monospace"}}>
+
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -71,6 +75,7 @@ const Contact = () => {
           <Box
             component="form"
             sx={{
+              fontFamily: "'Source Code Pro Variable', monospace",
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -79,13 +84,39 @@ const Contact = () => {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" label="Name" variant="outlined" />
-            <TextField id="outlined-basic" label="Email" variant="outlined" />
+         <TextField
+  id="outlined-basic"
+  label="Name"
+  variant="outlined"
+  sx={{
+    '& .MuiInputBase-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Change font family here
+    },
+    '& .MuiInputLabel-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Change font family for the label
+    },
+  }}
+/>
+
+<TextField
+  id="outlined-basic"
+  label="Email"
+  variant="outlined"
+  sx={{
+    '& .MuiInputBase-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Change font family here
+    },
+    '& .MuiInputLabel-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Change font family for the label
+    },
+  }}
+/>
           </Box>
 
           <Box
             component="form"
             sx={{
+              fontFamily: "'Source Code Pro Variable', monospace",
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -96,7 +127,21 @@ const Contact = () => {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" label="Message" variant="outlined" multiline rows={8} />
+           <TextField
+  id="outlined-basic"
+  label="Message"
+  variant="outlined"
+  multiline
+  rows={8}
+  sx={{
+    '& .MuiInputBase-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Font family for the input text
+    },
+    '& .MuiInputLabel-root': {
+      fontFamily: "'Source Code Pro Variable', monospace", // Font family for the label
+    },
+  }}
+/>
           </Box>
 
           <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
@@ -107,20 +152,26 @@ const Contact = () => {
 
       <Box
         sx={{
+          fontFamily: "'Source Code Pro Variable', monospace",
           mt: 4,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        <Typography variant="body2" color="text.secondary" align="center">
-          {'Copyright © '}
-          <Link color="inherit" href="https://mui.com/">
-            WORKS
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-        </Typography>
+       <Typography
+  variant="body2"
+  color="text.secondary"
+  align="center"
+  sx={{ fontFamily: "'Source Code Pro Variable', monospace" }} // Apply font family here
+>
+  {'Copyright © '}
+  <Link color="inherit" href="https://mui.com/">
+    WORKS
+  </Link>{' '}
+  {new Date().getFullYear()}
+  {'.'}
+</Typography>
       </Box>
     </div>
   );

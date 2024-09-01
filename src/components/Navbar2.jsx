@@ -37,6 +37,7 @@ export default function Navbar2({ cards, orders, setOrders }) {
   return (
     <Box
       sx={{
+        fontFamily: "'Source Code Pro Variable', monospace",
         display: 'flex',
         justifyContent: 'space-between', // Distributes space evenly between items
         alignItems: 'center',
