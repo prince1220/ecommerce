@@ -30,9 +30,9 @@ function About() {
   alt="Description of the image"
   style={{
     width: '100%', // Make image responsive
-    maxWidth: '300px', // Limit the maximum width of the image
+    maxWidth: '350px', // Limit the maximum width of the image
     height: '500px', // Set the height of the container
-    borderRadius: '8px',
+    borderRadius: '0px',
     objectFit: 'cover', // Ensures the image covers the container while maintaining its aspect ratio
     objectPosition: 'center', // Center the image within the container
   }}

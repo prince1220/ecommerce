@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 // Import your logo image
 import logo from '../logo.png'; // Adjust the path as needed
 
-const pages = [{ name: 'Products', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
+const pages = [{ name: 'Home', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
 
 export default function Navbar2({ cards, orders, setOrders }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
