@@ -67,15 +67,20 @@ function About() {
       </Box>
 
       {/* Copyright at the bottom */}
-      <Box sx={{ position: 'absolute', bottom: '10px', width: '100%', textAlign: 'center' }}>
-        <Typography variant="body2" color="text.secondary">
-          {'Copyright © '}
-          <Link color="inherit" href="https://mui.com/">
-            WORKS
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-        </Typography>
+      <Box sx={{ fontFamily: "'Source Code Pro Variable', monospace", position: 'absolute', bottom: '10px', width: '100%', textAlign: 'center' }}>
+      <Typography
+  variant="body2"
+  color="text.secondary"
+  align="center"
+  sx={{ fontFamily: "'Source Code Pro Variable', monospace" }} // Apply font family here
+>
+  {'Copyright © '}
+  <Link color="inherit" href="https://mui.com/">
+    WORKS
+  </Link>{' '}
+  {new Date().getFullYear()}
+  {'.'}
+</Typography>
       </Box>
     </Box>
   );

@@ -41,7 +41,7 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
           {/* Image Component */}
           <CardMedia
             component="img"
-            height="400" // Adjust the height as needed
+            height="600" // Adjust the height as needed
             image={img} // Use the img prop to set the image source
             alt={name} // Use the name prop for the alt text
             sx={{
