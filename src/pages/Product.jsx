@@ -5,10 +5,10 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
 const currencies = [
-  { value: 'USD', label: '$' },
-  { value: 'EUR', label: '€' },
-  { value: 'BTC', label: '฿' },
-  { value: 'JPY', label: '¥' },
+  { value: 'small', label: 'S' },
+  { value: 'medium', label: 'M' },
+  { value: 'large', label: 'L' },
+  { value: 'xlarge', label: 'XL' },
 ];
 
 export default function Product({ cards, setOrders, orders }) {
@@ -71,7 +71,7 @@ export default function Product({ cards, setOrders, orders }) {
           />
 
           <img
-            src="https://i.ibb.co/52jgJSS/WORKS-Logo-Tee-black-02.png"
+            src="https://i.ibb.co/tc1Qg4Y/WORKS-Logo-Tee-black-02.png"
             alt="Additional Image 2"
             style={{ width: '100%', height: 'auto' }}
           />
@@ -79,53 +79,37 @@ export default function Product({ cards, setOrders, orders }) {
 
         {/* Product Details and Form */}
         <Box
-          sx={{
-            flexGrow: 1,
-            marginLeft: { sm: '20px' }, // Margin to the left of the images on larger screens
-          }}
-        >
-          <h1>{product.name}</h1>
-          <p>{product.price}</p>
+  sx={{
+    flexGrow: 1,
+    marginLeft: { sm: '100px' }, // Margin to the left of the Box on larger screens
+  }}
+>
+  <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
+  <p style={{ marginBottom: '40px' }}>{product.price}</p>
+  <p style={{ marginBottom: '40px' }}>{product.discription1}</p>
+  <p style={{ marginBottom: '40px' }}>{product.discription2}</p>
+  <p style={{ marginBottom: '40px' }}>{product.discription3}</p>
+  <p style={{ marginBottom: '40px' }}>{product.discription4}</p>
 
-          {/* TextField components */}
-          <div>
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              defaultValue="EUR"
-              helperText="Please select your currency"
-              sx={{ fontFamily: 'Source Code Pro, monospace' }} // Apply font family here
-            >
-              {currencies.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+  {/* TextField components */}
+  <div style={{ marginBottom: '16px' }}>
+    <TextField
+      id="outlined-select-currency"
+      select
+      label="size"
+      defaultValue="small"
+      helperText="Please select your size"
+      sx={{ fontFamily: 'Source Code Pro, monospace' }} // Apply font family here
+    >
+      {currencies.map(option => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </TextField>
+  </div>
+</Box>
 
-            <TextField
-              id="outlined-select-currency-native"
-              select
-              label="Native select"
-              defaultValue="EUR"
-              SelectProps={{
-                native: true,
-              }}
-              InputProps={{
-                sx: {
-                  fontFamily: 'Source Code Pro, monospace', // Apply font family here
-                },
-              }}
-            >
-              {currencies.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-          </div>
-        </Box>
       </Box>
     </Box>
   );
