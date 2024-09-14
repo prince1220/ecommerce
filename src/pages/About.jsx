@@ -49,7 +49,7 @@ function About() {
         </Typography>
         <Typography
         variant="body1" sx={{
-          fontFamily: "'Source Code Pro Variable', monospace", color: 'grey' }}>
+          fontFamily: "'Source Code Pro Variable', monospace", fontWeight: '100', color: 'grey' }}>
           At vero eos et accusamus et iusto odio dignissimos
           ducimus qui blanditiis praesentium voluptatum deleniti
           atque corrupti quos dolores et quas molestias excepturi

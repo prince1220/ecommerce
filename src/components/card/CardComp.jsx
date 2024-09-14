@@ -74,7 +74,7 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
               {price}
             </Typography>
   
-            {isAvailable && !isInCart && (
+            {/* {isAvailable && !isInCart && (
               <Button
                 onClick={() => {
                   setOrders((old_orders) => {
@@ -92,7 +92,7 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
                 Add
               </Button>
             )}
-  
+   */}
             {isAvailable && isInCart && (
               <Button
                 onClick={() => {
