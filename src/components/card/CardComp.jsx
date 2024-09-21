@@ -91,8 +91,8 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
               >
                 Add
               </Button>
-            )}
-   */}
+            )} */}
+  
             {isAvailable && isInCart && (
               <Button
                 onClick={() => {

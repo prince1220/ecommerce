@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import CardComp from '../components/card/CardComp';
+import Button from "@mui/material/Button";
 
 const currencies = [
   { value: 'small', label: 'S' },
@@ -84,11 +86,11 @@ export default function Product({ cards, setOrders, orders }) {
   }}
 >
   <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
-  <p style={{ marginBottom: '40px', fontWeight: 100 }}>{product.price}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 100 }}>{product.discription1}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 100 }}>{product.discription2}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 100 }}>{product.discription3}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 100 }}>{product.discription4}</p>
+  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.price}</p>
+  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription1}</p>
+  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription2}</p>
+  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription3}</p>
+  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription4}</p>
 
   {/* TextField components */}
   <div style={{ marginBottom: '16px' }}>
@@ -106,6 +108,22 @@ export default function Product({ cards, setOrders, orders }) {
         </MenuItem>
       ))}
     </TextField>
+    <Button
+                onClick={() => {
+                  setOrders((old_orders) => {
+                    if (old_orders.find((item) => item === id)) {
+                      return old_orders;
+                    } else {
+                      return [...old_orders, id];
+                    }
+                  });
+                }}
+                color="warning"
+                variant="contained"
+                size="small"
+              >
+                Add
+              </Button>
   </div>
 </Box>
 

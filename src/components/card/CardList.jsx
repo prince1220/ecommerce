@@ -16,7 +16,7 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
 
     {cards.filter(card=>{
         
-      let price=Number(card.price.substring(1,))
+      let price=Number(card.price.substring(1))
 
       return price>=pricesRange[0] && price<=pricesRange[1]
     }).map((card,index)=>{ {/* Can not read map of "undefined" */}

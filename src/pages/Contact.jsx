@@ -52,13 +52,13 @@ const Contact = () => {
               <h5>CONTACT</h5>
             
             </Typography>
-            <Typography variant="body1" sx={{ fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 100}} >
+            <Typography variant="body1" sx={{ fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 400}} >
               works_wear@shop.com
             </Typography>
             <Typography variant="body1" sx={{ fontFamily: "'Source Code Pro Variable', monospace", color: 'black', mt: 2 }}>
              <h3>RETURN POLICY</h3>
             </Typography>
-            <Typography variant="body1"sx={{ fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 100}}>
+            <Typography variant="body1"sx={{ fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 400}}>
 
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -75,7 +75,7 @@ const Contact = () => {
           <Box
             component="form"
             sx={{
-              fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 100,
+              fontFamily: "'Source Code Pro Variable', monospace", fontWeight: 400,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -117,7 +117,7 @@ const Contact = () => {
             component="form"
             sx={{
               fontFamily: "'Source Code Pro Variable', monospace",
-              fontWeight: "100",
+              fontWeight: "400",
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
