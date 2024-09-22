@@ -23,8 +23,10 @@
     "@fontsource-variable/source-code-pro": "^5.0.20",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.16.6",
+    "react-product-slider": "^0.2.5",
     "react-router-dom": "^6.24.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.1.13"
   },
   "browserslist": {
     "production": [

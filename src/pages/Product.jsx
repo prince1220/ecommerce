@@ -5,12 +5,37 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button";
 
+import ReactProductSlider from "react-product-slider";
+
+
 const currencies = [
   { value: 'small', label: 'S' },
   { value: 'medium', label: 'M' },
   { value: 'large', label: 'L' },
   { value: 'xlarge', label: 'XL' },
 ];
+
+const items = [
+  {
+    src: "https://farm3.staticflickr.com/2877/9011629527_5c8af0d5ec_b.jpg",
+    alt: "slide",
+    thumbnail: "https://farm3.staticflickr.com/2877/9011629527_5c8af0d5ec_b.jpg",
+  },
+  {
+    src: "https://i.redd.it/vbp0ere319za1.jpg",
+    
+    alt: "slide",
+    thumbnail: "https://i.redd.it/vbp0ere319za1.jpg",
+  },
+  {
+    src: "https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg",
+    
+    alt: "slide",
+    thumbnail: "https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg",
+  },
+];
+
+//https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg
 
 export default function Product({ cards, setOrders, orders }) {
   const { id } = useParams();
@@ -27,6 +52,8 @@ export default function Product({ cards, setOrders, orders }) {
 
   let isInCart = orders.find(item => item === id) !== undefined;
   let isAvailable = true; // You can modify this based on actual availability logic
+
+
 
   return (
     <Box
@@ -60,21 +87,7 @@ export default function Product({ cards, setOrders, orders }) {
             maxWidth: '400px',
           }}
         >
-          <img
-            src={product.img}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
-          <img
-            src={product.img2}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
-          <img
-            src={product.img3}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
+           <ReactProductSlider reverse={true} items={items} />
         </Box>
 
         {/* Product Details and Form */}
