@@ -24,7 +24,7 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
      if(!card.name.includes(searchQ) && !card.description.includes(searchQ)) return <></>
     
      
-     return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} img={card.img} isAvailable={card.isAvailable=="true"}   />
+     return <Card setOrders={setOrders} orders={orders} id={card.id} name={card.name} description={card.description} price={card.price} img={card.img1} isAvailable={card.isAvailable=="true"}   />
     })}
 
 

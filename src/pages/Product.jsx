@@ -15,25 +15,6 @@ const currencies = [
   { value: 'xlarge', label: 'XL' },
 ];
 
-const items = [
-  {
-    src: "https://farm3.staticflickr.com/2877/9011629527_5c8af0d5ec_b.jpg",
-    alt: "slide",
-    thumbnail: "https://farm3.staticflickr.com/2877/9011629527_5c8af0d5ec_b.jpg",
-  },
-  {
-    src: "https://i.redd.it/vbp0ere319za1.jpg",
-    
-    alt: "slide",
-    thumbnail: "https://i.redd.it/vbp0ere319za1.jpg",
-  },
-  {
-    src: "https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg",
-    
-    alt: "slide",
-    thumbnail: "https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg",
-  },
-];
 
 //https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg
 
@@ -45,6 +26,29 @@ export default function Product({ cards, setOrders, orders }) {
   }
 
   const product = cards.find(el => el.id == id);
+
+  const items = [
+    {
+      src: product.img1,
+      alt: "image 1",
+      thumbnail:product.img1 ,
+    },
+    {
+      src: product.img2,
+      
+      alt: "image 2",
+      thumbnail:product.img2,
+    },
+    {
+      src: product.img3,
+      
+      alt: "image 3",
+      thumbnail: product.img3,
+    },
+  ];
+  
+
+
 
   if (!product) {
     return <div>Product not found</div>;
