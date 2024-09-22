@@ -14,16 +14,16 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
   let isInCart = orders.find(item => item === id) !== undefined;
   let label, color;
 
-  // if (!isAvailable) {
-  //   label = "Sold out";
-  //   color = "orange";
-  // } else if (isInCart) {
-  //   label = "In-Cart";
-  //   color = "red";
-  // } else {
-  //   label = "Available";
-  //   color = "green";
-  // }
+  if (!isAvailable) {
+    label = "Sold out";
+    color = "orange";
+  } else if (isInCart) {
+    label = "In-Cart";
+    color = "red";
+  } else {
+    label = "Available";
+    color = "green";
+  }
 
   return (
     <Box

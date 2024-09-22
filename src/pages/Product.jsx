@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import CardComp from '../components/card/CardComp';
 import Button from "@mui/material/Button";
 
 const currencies = [
@@ -26,13 +25,16 @@ export default function Product({ cards, setOrders, orders }) {
     return <div>Product not found</div>;
   }
 
+  let isInCart = orders.find(item => item === id) !== undefined;
+  let isAvailable = true; // You can modify this based on actual availability logic
+
   return (
     <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh', // Ensure the container takes up the full height of the screen
+        minHeight: '100vh',
       }}
     >
       <Box
@@ -40,10 +42,10 @@ export default function Product({ cards, setOrders, orders }) {
         sx={{
           fontFamily: "'Source Code Pro Variable', monospace",
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' }, // Stack column on small screens, row on larger screens
-          alignItems: { sm: 'flex-start' }, // Align items to the start on larger screens
-          justifyContent: 'space-between', // Space out the image column and the other content
-          paddingTop: '100px', // Add padding to the top
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { sm: 'flex-start' },
+          justifyContent: 'space-between',
+          paddingTop: '100px',
           '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}
         noValidate
@@ -54,79 +56,105 @@ export default function Product({ cards, setOrders, orders }) {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '40px', // Space between images
+            gap: '40px',
             maxWidth: '400px',
           }}
         >
-          {/* Original Image */}
           <img
-  src={product.img}
-  alt={product.name}
-  style={{ width: '100%', height: 'auto' }}
-/>
-<img
-  src={product.img2}
-  alt={product.name}
-  style={{ width: '100%', height: 'auto' }}
-/>
-<img
-  src={product.img3}
-  alt={product.name}
-  style={{ width: '100%', height: 'auto' }}
-/>
-        
+            src={product.img}
+            alt={product.name}
+            style={{ width: '100%', height: 'auto' }}
+          />
+          <img
+            src={product.img2}
+            alt={product.name}
+            style={{ width: '100%', height: 'auto' }}
+          />
+          <img
+            src={product.img3}
+            alt={product.name}
+            style={{ width: '100%', height: 'auto' }}
+          />
         </Box>
 
         {/* Product Details and Form */}
         <Box
-  sx={{
-    fontFamily: 'Source Code Pro, monospace',
-    flexGrow: 1,
-    marginLeft: { sm: '100px' }, // Margin to the left of the Box on larger screens
-  }}
->
-  <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
-  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.price}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription1}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription2}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription3}</p>
-  <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription4}</p>
+          sx={{
+            fontFamily: 'Source Code Pro, monospace',
+            flexGrow: 1,
+            marginLeft: { sm: '100px' },
+          }}
+        >
+          <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
+          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.price}</p>
+          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription1}</p>
+          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription2}</p>
+          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription3}</p>
+          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription4}</p>
 
-  {/* TextField components */}
-  <div style={{ marginBottom: '16px' }}>
-    <TextField
-      id="outlined-select-currency"
-      select
-      label="size"
-      defaultValue="small"
-      helperText="Please select your size"
-      
-    >
-      {currencies.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </TextField>
-    <Button
-                onClick={() => {
-                  setOrders((old_orders) => {
-                    if (old_orders.find((item) => item === id)) {
-                      return old_orders;
-                    } else {
-                      return [...old_orders, id];
-                    }
-                  });
-                }}
-                color="warning"
-                variant="contained"
-                size="small"
-              >
-                Add
-              </Button>
-  </div>
-</Box>
+          {/* TextField components */}
+          <div style={{ marginBottom: '16px' }}>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Size"
+              defaultValue="small"
+              helperText="Please select your size"
+            >
+              {currencies.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
 
+          {/* Conditional Button Rendering */}
+          {isAvailable && !isInCart && (
+            <Button
+            onClick={() => {
+              setOrders((old_orders) => {
+                if (old_orders.find((item) => item === id)) {
+                  return old_orders;
+                } else {
+                  return [...old_orders, id];
+                }
+              });
+            }}
+            color="warning"
+            variant="contained"
+            size="small"
+            sx={{
+              fontFamily: "'Source Code Pro Variable', monospace",
+              backgroundColor: '#FFFFFF', // Background color
+              color: '#757575', // Text color
+              border: '1px solid #757575', // Outline color and thickness
+              '&:hover': {
+                backgroundColor: '#FAFAFA', // Lighter background shade on hover
+                color: '#FAFAFA', // Text color on hover
+                borderColor: '#757575', // Darker outline on hover
+              },
+            }}
+          >
+            Add to Cart
+          </Button>
+          )}
+
+          {isAvailable && isInCart && (
+            <Button
+              onClick={() => {
+                setOrders((old_orders) => {
+                  return old_orders.filter((item) => item !== id);
+                });
+              }}
+              color="info"
+              variant="contained"
+              size="small"
+            >
+              Remove
+            </Button>
+          )}
+        </Box>
       </Box>
     </Box>
   );
