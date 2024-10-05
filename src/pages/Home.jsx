@@ -10,7 +10,7 @@ function Home({cards,orders,setOrders,searchQ,setSearchQ,setPricesRange,pricesRa
   return (
     <div>
       <CardList cards={cards} orders={orders} setOrders={setOrders} pricesRange={pricesRange} searchQ={searchQ} />
-      <SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />
+      {/*<SearchFilter searchQ={searchQ} setSearchQ={setSearchQ} pricesRange={pricesRange} setPricesRange={setPricesRange} />*/}
       
     </div>
   );

@@ -11,7 +11,7 @@ export default function CardList({cards,pricesRange,orders,setOrders,searchQ}) {
     flexWrap:"wrap",
     alignItems:"flex-start",
     justifyContent:"start",
-    columnGap:2
+    columnGap:1.5
     }}>
 
     {cards.filter(card=>{

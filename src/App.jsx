@@ -35,7 +35,7 @@ export default function App() {
   {/*TODO (hard / critical) replace cards , setCards into products ,setProducts*/}
   const [cards,setCards] = useState([]) ///loading API
   const [orders,setOrders] = useState([])
-  const [pricesRange, setPricesRange] = useState([500,2000]);
+  const [pricesRange, setPricesRange] = useState([-100,100000]);
   
 
 
