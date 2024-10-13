@@ -89,6 +89,7 @@ export default function Product({ cards, setOrders, orders }) {
             flexDirection: 'column',
             gap: '40px',
             maxWidth: '800px',
+            
           }}
         >
            <ReactProductSlider reverse={true} items={items} />
