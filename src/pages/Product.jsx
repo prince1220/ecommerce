@@ -4,10 +4,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button";
+import { useCart } from "@reflowhq/cart-react";
 
 import ReactProductSlider from "react-product-slider";
 
-
+const config = {
+  projectID: "1472176007",
+};
 const currencies = [
   { value: 'small', label: 'S' },
   { value: 'medium', label: 'M' },
@@ -20,6 +23,7 @@ const currencies = [
 
 export default function Product({ cards, setOrders, orders }) {
   const { id } = useParams();
+  const cart = useCart(config);
 
   if (!cards) {
     return <div>Getting product details</div>;
@@ -131,13 +135,15 @@ export default function Product({ cards, setOrders, orders }) {
           {isAvailable && !isInCart && (
             <Button
             onClick={() => {
-              setOrders((old_orders) => {
+             /* setOrders((old_orders) => {
                 if (old_orders.find((item) => item === id)) {
                   return old_orders;
                 } else {
                   return [...old_orders, id];
                 }
-              });
+              });*/
+              alert(JSON.stringify(product))
+              cart.addProduct({id:product.cart_id})
             }}
             color="warning"
             variant="contained"

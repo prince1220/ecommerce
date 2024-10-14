@@ -1,19 +1,19 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { useCart } from "@reflowhq/cart-react";
-
 import CartView from "@reflowhq/cart-react";
 import "@reflowhq/cart-react/dist/style.css";
+import { useState } from 'react';
+const isInArray = (arr, id) => {
+  return arr.includes(id);
+};
+
+const config = {
+  projectID: "1472176007",
+};
 
 function Cart({ cards, orders, setOrders }) {
-  const isInArray = (arr, id) => {
-    return arr.includes(id);
-  };
 
-  const config = {
-    projectID: "1234",
-    localization,
-  };
   
   const cart = useCart(config);
 
@@ -22,12 +22,27 @@ function Cart({ cards, orders, setOrders }) {
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      p={2}
-      sx={{ border: 'none', width: '100%' }}
-    >
-      <h1 style={{ margin: 0, marginBottom: '20px' }}>Cart</h1>
+    display="flex"
+    flexDirection="column"
+    p={2}
+    sx={{
+      border: 'none',
+      width: '100%', // Full width of the page
+      maxWidth: '900px', // Set a max-width to center it better
+      paddingLeft: '5px',  // Padding on the left
+      paddingRight: '5px', // Padding on the right
+      position: 'fixed',   // Make the container fixed to the page
+      top: 100,              // Align to the top of the page
+      left: '50%',         // Center horizontally
+      transform: 'translateX(-50%)', // Proper centering using transform
+      fontFamily: "'Source Code Pro Variable', monospace",
+      zIndex: 1000,        // Ensure it's above other content if needed
+    }}
+  >
+  
+      <h1 style={{ textAlign: 'center', margin: 0, marginBottom: '20px' }}>
+        CART
+      </h1>
 
       {/* CartView */}
       <CartView
@@ -40,7 +55,7 @@ function Cart({ cards, orders, setOrders }) {
       />
 
       {/* Add product to cart for testing */}
-      <button onClick={() => cart.addProduct({ id: "5678" })}>Add to cart</button>
+      {/* <button onClick={() => cart.addProduct({ id: "1404857296" })}>Add to cart</button> */}
     </Box>
   );
 }
