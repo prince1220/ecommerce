@@ -18,6 +18,8 @@ import TextField from '@mui/material/TextField';
 import Product from "./pages/Product";
 import Admin from "./pages/Admin";
 import '@fontsource-variable/source-code-pro';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 /*
 npm install [name]
 
@@ -31,6 +33,9 @@ npm install [extension]
 export default function App() {
 
   
+
+
+
   const [searchQ,setSearchQ]=useState(""); /// input change
   {/*TODO (hard / critical) replace cards , setCards into products ,setProducts*/}
   const [cards,setCards] = useState([]) ///loading API
@@ -40,9 +45,12 @@ export default function App() {
 
 
   useEffect(()=>{
-    fetch("https://api.npoint.io/d7f875245ffc9671a617").then(res=>res.json()).then(data=>{
-      setCards(data.cards)
-      console.log(data.cards);
+    fetch("http://localhost:8000/products").then(res=>res.json()).then(data=>{
+      
+      setCards(data)
+      console.log("fetch")
+      console.log(data)
+      
     })
   },[])
 
@@ -57,7 +65,9 @@ export default function App() {
 
   return (
     <>
-  
+     <TawkMessengerReact
+                propertyId="6727f8b82480f5b4f598264f"
+                widgetId="1ibq27407"/>
     <Router>
   <Navbar2 cards={cards} orders= {orders} setOrders={setOrders}/> 
     

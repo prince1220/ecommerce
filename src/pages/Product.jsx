@@ -23,14 +23,17 @@ const currencies = [
 
 export default function Product({ cards, setOrders, orders }) {
   const { id } = useParams();
+  console.log(id)
   const cart = useCart(config);
 
-  if (!cards) {
+  if (!cards || cards.length == 0) {
     return <div>Getting product details</div>;
   }
 
-  const product = cards.find(el => el.id == id);
 
+  const product = cards.find(el => el.id == id);
+  console.log(cards)
+  console.log(product)
   const items = [
     {
       src: product.img1,
@@ -135,14 +138,8 @@ export default function Product({ cards, setOrders, orders }) {
           {isAvailable && !isInCart && (
             <Button
             onClick={() => {
-             /* setOrders((old_orders) => {
-                if (old_orders.find((item) => item === id)) {
-                  return old_orders;
-                } else {
-                  return [...old_orders, id];
-                }
-              });*/
-              alert(JSON.stringify(product))
+            
+             
               cart.addProduct({id:product.cart_id})
             }}
             color="warning"

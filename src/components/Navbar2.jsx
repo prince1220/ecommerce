@@ -8,15 +8,20 @@ import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import MenuItem from '@mui/material/MenuItem';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
+import { useCart } from "@reflowhq/cart-react";
 
 // Import your logo image
 import logo from '../logo.png'; // Adjust the path as needed
 
 const pages = [{ name: 'Home', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
-
+const config = {
+  projectID: "1472176007",
+};
 export default function Navbar2({ cards, orders, setOrders }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
+ const cart = useCart(config);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,6 +38,9 @@ export default function Navbar2({ cards, orders, setOrders }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
+ 
 
   return (
     <Box
@@ -65,7 +73,7 @@ export default function Navbar2({ cards, orders, setOrders }) {
       {/* Cart Icon */}
       <Box>
         <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show cart items" color="inherit">
-          <Badge badgeContent={orders.length} color="error">
+          <Badge badgeContent={cart.products.length} color="error">
             <ShoppingCartSharpIcon />
           </Badge>
         </IconButton>
@@ -86,17 +94,18 @@ export default function Navbar2({ cards, orders, setOrders }) {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {orders.map((order) => {
-            const card = cards.find(item => item.id === order);
+          {cart.products.map((product) => {
+  
+            
             return (
-              <MenuItem key={order} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  {card.name} - {card.price}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" style={{display:"flex",gap:10,alignItems:"center",justifyContent:"space-around"}}>
+                  <div>{product.name}</div> <div>{product.price} </div> <img width={64}  src={product.img1} />
                   <Button onClick={() => {
-                    setOrders((oldOrders) => oldOrders.filter(item => item !== order));
+                    cart.removeLineItem(product.lineItemID)
                   }}>
                     Delete
-                  </Button>
+                </Button>
                 </Typography>
               </MenuItem>
             );

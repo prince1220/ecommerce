@@ -24,6 +24,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.16.6",
     "@reflowhq/cart-react": "^3.0.0",
+    "@tawk.to/tawk-messenger-react": "^2.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "react-product-slider": "^0.2.5",
