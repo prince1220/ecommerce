@@ -108,6 +108,7 @@ export default function Product({ cards, setOrders, orders }) {
             fontFamily: 'Source Code Pro, monospace',
             flexGrow: 1,
             marginLeft: { sm: '100px' },
+            
           }}
         >
           <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>

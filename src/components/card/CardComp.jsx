@@ -36,84 +36,98 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
         fontFamily: "'Source Code Pro Variable', monospace", // Apply font family to the entire card
       }}
     >
-      <Card variant="outlined">
-        <React.Fragment>
-          {/* Image Component */}
-          <CardMedia
-            component="img"
-            height="600" // Adjust the height as needed
-            image={img} // Use the img prop to set the image source
-            alt={name} // Use the name prop for the alt text
-            sx={{
-              objectFit: "contain", // Ensures the image covers the container without distortion
-              width: "100%", // Ensures the image takes up the full width of the container
-            }}
-          />
-          
-          <CardContent>
-            <Typography
-              sx={{
-                fontSize: 10,
-                display: "flex",
-                alignItems: "center",
-              }}
-              color="text.secondary"
-              gutterBottom
-            >
-              {/* {label} <FiberManualRecordIcon style={{ color: grey, height: 50, width: 10 }} /> */}
-            </Typography>
-            <Typography variant="h7" component="div">
-              {name}
-            </Typography>
-            <Typography color="text.secondary" variant="body2">
-              {description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Typography color="#fffff" variant="h8">
-              {price}
-            </Typography>
-  
-            {/* {isAvailable && !isInCart && (
-              <Button
-                onClick={() => {
-                  setOrders((old_orders) => {
-                    if (old_orders.find((item) => item === id)) {
-                      return old_orders;
-                    } else {
-                      return [...old_orders, id];
-                    }
-                  });
-                }}
-                color="warning"
-                variant="contained"
-                size="small"
-              >
-                Add
-              </Button>
-            )} */}
-  
-            {isAvailable && isInCart && (
-              <Button
-                onClick={() => {
-                  setOrders((old_orders) => {
-                    return old_orders.filter((item) => item !== id);
-                  });
-                }}
-                color="info"
-                variant="contained"
-                size="small"
-              >
-                Remove
-              </Button>
-            )}
-  
-            <Link to={"/product/" + id}>
-              <Button>View</Button>
-            </Link>
-          </CardActions>
-        </React.Fragment>
-      </Card>
+    <Card
+  variant="none"
+  sx={{
+    display: "flex", // Enables flexbox layout
+    flexDirection: "column", // Stacks children vertically
+    alignItems: "center", // Centers all children horizontally
+    justifyContent: "center", // Centers all children vertically
+    height: "100%", // Ensures the card fills its container
+    textAlign: "center", // Centers text in the card
+    padding: 2, // Optional padding for spacing
+  }}
+>
+  {/* Image Component */}
+  <CardMedia
+  component="img"
+  image={img}
+  alt={name}
+  sx={{
+    objectFit: "contain",
+    width: "200%",
+    maxHeight: "90%", // Adjust to control proportional size
+  }}
+/>
+
+
+  <CardContent
+    sx={{
+      display: "flex", // Enables flexbox layout
+      flexDirection: "column", // Stacks content vertically
+      alignItems: "center", // Centers content horizontally
+      justifyContent: "center", // Centers content vertically
+      textAlign: "center", // Centers text in the content
+    }}
+  >
+    <Typography
+      sx={{
+        fontSize: 10,
+        display: "flex",
+        alignItems: "center",
+      }}
+      color="text.secondary"
+      gutterBottom
+    >
+      {/* Optional label or icon */}
+    </Typography>
+    <Typography variant="" component="div">
+      {name}
+    </Typography>
+    <Typography color="text.secondary" variant="body2">
+      {description}
+    </Typography>
+  </CardContent>
+
+  <CardActions
+    sx={{
+      display: "flex",
+      justifyContent: "center", // Centers the actions horizontally
+      flexDirection: "column", // Stacks buttons vertically
+      alignItems: "center", // Centers the buttons
+      paddingBottom: 2,
+    }}
+  >
+    <Typography variant="" color="text.primary">
+      {price}
+    </Typography>
+
+    {isAvailable && isInCart && (
+      <Button
+        onClick={() => {
+          setOrders((old_orders) => old_orders.filter((item) => item !== id));
+        }}
+        color="info"
+        variant="contained"
+        size="small"
+      >
+        Remove
+      </Button>
+    )}
+
+    <Link to={`/product/${id}`}>
+      <Button  sx={{
+         fontSize: 14, color: 'grey',
+       
+         
+      
+    }}
+      
+      >View</Button>
+    </Link>
+  </CardActions>
+</Card>
+
     </Box>
   );
  }  
