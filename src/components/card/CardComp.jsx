@@ -116,14 +116,9 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
     )}
 
     <Link to={`/product/${id}`}>
-      <Button  sx={{
-         fontSize: 14, color: 'grey',
-       
-         
-      
-    }}
-      
+      <Button  sx={{ fontSize: 14, color: 'grey', }} 
       >View</Button>
+      
     </Link>
   </CardActions>
 </Card>

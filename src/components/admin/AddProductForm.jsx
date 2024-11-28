@@ -6,13 +6,14 @@ export default function AddProductForm({setCards}) {
   const [price, setPrice] = useState('');
   const [isAvailable, setIsAvailable] = useState('');
   const [view, setView] = useState('');
+  const [discription1, setDiscription1] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission, e.g., send data to the server
-    console.log({ name, price, isAvailable, view });
+    console.log({ name, price, isAvailable, view, discription1 });
     setCards(old=>{
-      return [...old,{ name, price, isAvailable, view }]
+      return [...old,{ name, price, isAvailable, view, discription1 }]
     })
 
     fetch("http://localhost:8000/products", {
@@ -20,7 +21,7 @@ export default function AddProductForm({setCards}) {
       headers: {
         "Content-Type": "application/json",  // Set headers in an object under 'headers'
       },
-      body: JSON.stringify({ name, price, isAvailable, view }), // Send JSON body
+      body: JSON.stringify({ name, price, isAvailable, view, discription1 }), // Send JSON body
     })
 
 
@@ -61,6 +62,15 @@ export default function AddProductForm({setCards}) {
         onChange={(e) => setView(e.target.value)} 
         style={{ fontFamily: "'Source Code Pro', monospace", fontSize: "16px", padding: "8px", marginBottom: "10px" }}
       />
+
+      <input 
+        type="text" 
+        placeholder="discription1" 
+        value={discription1} 
+        onChange={(e) => setDiscription1(e.target.value)} 
+        style={{ fontFamily: "'Source Code Pro', monospace", fontSize: "16px", padding: "8px", marginBottom: "10px" }}
+      />
+
       <button type="submit" style={{ fontFamily: "'Source Code Pro', monospace", fontSize: "16px", padding: "8px 16px" }}>
         Add
       </button>
