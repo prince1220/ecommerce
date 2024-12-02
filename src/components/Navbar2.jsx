@@ -13,7 +13,7 @@ import { useCart } from "@reflowhq/cart-react";
 // Import your logo image
 import logo from '../logo.png'; // Adjust the path as needed
 
-const pages = [{ name: 'Home', route: "/" }, { name: 'Contact', route: "/contact" }, { name: 'Cart', route: "/cart" }, { name: 'About', route: "/about" }];
+const pages = [{ name: 'Home', route: "/" },{ name: 'Build', route: "/build" }, { name: 'Contact', route: "/contact" }, { name: 'About', route: "/about" }, { name: 'Cart', route: "/cart" } ];
 const config = {
   projectID: "1472176007",
 };

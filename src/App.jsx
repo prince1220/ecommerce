@@ -17,8 +17,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Product from "./pages/Product";
 import Admin from "./pages/Admin";
+import Build from "./pages/Build"
 import '@fontsource-variable/source-code-pro';
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 
 /*
 npm install [name]
@@ -84,7 +86,7 @@ export default function App() {
         <Route path="/cart" element={<Cart cards={cards} orders={orders} setOrders={setOrders} />}/>
         <Route path="/contact" element={<Contact TextField={TextField} Box={Box}/>}/>
         <Route path="/product/:id" element={<Product cards={cards} orders={orders} setOrders={setOrders} />}/>
-        
+        <Route path="/build" element={<Build cards={cards} orders={orders} setOrders={setOrders} />}/>
        <Route path="*" element={<>Not found</>} />
      
       </Routes>
