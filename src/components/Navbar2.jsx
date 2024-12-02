@@ -98,8 +98,11 @@ export default function Navbar2({ cards, orders, setOrders }) {
   
             
             return (
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" style={{display:"flex",gap:10,alignItems:"center",justifyContent:"space-around"}}>
+              <MenuItem 
+             
+              
+              onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" style={{display:"flex",gap:20,alignItems:"center",justifyContent:"space-around"}}>
                   <div>{product.name}</div> <div>{product.price} </div> <img width={64}  src={product.img1} />
                   <Button onClick={() => {
                     cart.removeLineItem(product.lineItemID)
