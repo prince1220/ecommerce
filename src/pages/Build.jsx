@@ -1,22 +1,32 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 export default function WovenImageList() {
   return (
-    <ImageList sx={{ width: 500, height: 450 }} variant="woven" cols={3} gap={8}>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=161&fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
+    <Box
+      sx={{
+        display: 'flex', // Enables flexbox
+        justifyContent: 'center', // Centers horizontally
+        alignItems: 'center', // Centers vertically
+        height: '100vh', // Makes the container full height of the viewport
+        textAlign: 'center', // Optional for text alignment
+      }}
+    >
+      <ImageList sx={{ width: 800, height: 700 }} variant="list" cols={1} gap={500}>
+        {itemData.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?w=161&fit=crop&auto=format`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box>
   );
 }
 
