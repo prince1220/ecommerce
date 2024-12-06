@@ -33,20 +33,30 @@ export default function WovenImageList() {
 const itemData = [
   {
     img: 'https://i.ibb.co/zh5bb4r/IMG-3769.jpg" alt="IMG-3769" border="0">',
-    title: 'Bed',
+    title: '1',
   },
   {
-    img: 'https://i.ibb.co/bKJPvvB/WORKS-Power-Plant-01.jpg" alt="WORKS-Power-Plant-01" border="0">',
-    title: 'Kitchen',
+    img: 'https://i.ibb.co/rpNYzTG/IMG-3850.jpg" alt="IMG-3850" border="0">',
+    title: '2',
   },
+
+  {
+    img: 'https://i.ibb.co/QXWt8DJ/WORKS-Product-Shots.jpg" alt="WORKS-Product-Shots" border="0">',
+    title: '3',
+  },
+
   {
     img: 'https://i.ibb.co/5FKXZby/WORKS-Randoms-15.png" alt="WORKS-Randoms-15" border="0">',
-    title: 'Sink',
+    title: '4',
   },
  
   {
-    img: 'https://i.ibb.co/8x7xYBV/IMG-3398.png" alt="IMG-3398" border="0">',
-    title: 'Chairs',
+    img: 'https://i.ibb.co/5KYXH1V/IMG-3396.png" alt="IMG-3396" border="0">',
+    title: '5',
   },
 
+  {
+    img: 'https://i.ibb.co/ZcX9N2R/IMG-3864.jpg" alt="IMG-3864" border="0">',
+    title: '6',
+  },
 ];

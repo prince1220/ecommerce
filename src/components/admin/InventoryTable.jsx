@@ -65,7 +65,12 @@ const headCells = [
     disablePadding: false,
     label: 'Availability',
   },
-  
+  {
+    id: 'discription1',
+    numeric: true,
+    disablePadding: false,
+    label: 'Discription1',
+  },
 ];
 
 function EnhancedTableHead(props) {
