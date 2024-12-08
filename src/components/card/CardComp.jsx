@@ -9,8 +9,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { grey } from "@mui/material/colors";
+import { useState } from "react";
 
-export default function CardComp({ setOrders, orders, id, name, description, price, isAvailable, img }) {
+export default function CardComp({
+  setOrders, orders, id, name, description, price, isAvailable, img, hoverImg
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
   let isInCart = orders.find(item => item === id) !== undefined;
   let label, color;
 
@@ -33,96 +38,88 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
         height: 600,
         margin: 10,
         paddingLeft: 23,
-        fontFamily: "'Source Code Pro Variable', monospace", // Apply font family to the entire card
+        fontFamily: "'Source Code Pro Variable', monospace",
       }}
     >
-    <Card
-  variant="none"
-  sx={{
-    display: "flex", // Enables flexbox layout
-    flexDirection: "column", // Stacks children vertically
-    alignItems: "center", // Centers all children horizontally
-    justifyContent: "center", // Centers all children vertically
-    height: "100%", // Ensures the card fills its container
-    textAlign: "center", // Centers text in the card
-    padding: 2, // Optional padding for spacing
-  }}
->
-  {/* Image Component */}
-  <CardMedia
-  component="img"
-  image={img}
-  alt={name}
-  sx={{
-    objectFit: "contain",
-    width: "200%",
-    maxHeight: "90%", // Adjust to control proportional size
-  }}
-/>
-
-
-  <CardContent
-    sx={{
-      display: "flex", // Enables flexbox layout
-      flexDirection: "column", // Stacks content vertically
-      alignItems: "center", // Centers content horizontally
-      justifyContent: "center", // Centers content vertically
-      textAlign: "center", // Centers text in the content
-    }}
-  >
-    <Typography
-      sx={{
-        fontSize: 10,
-        display: "flex",
-        alignItems: "center",
-      }}
-      color="text.secondary"
-      gutterBottom
-    >
-      {/* Optional label or icon */}
-    </Typography>
-    <Typography variant="" component="div">
-      {name}
-    </Typography>
-    <Typography color="text.secondary" variant="body2">
-      {description}
-    </Typography>
-  </CardContent>
-
-  <CardActions
-    sx={{
-      display: "flex",
-      justifyContent: "center", // Centers the actions horizontally
-      flexDirection: "column", // Stacks buttons vertically
-      alignItems: "center", // Centers the buttons
-      paddingBottom: 2,
-    }}
-  >
-    <Typography variant="" color="text.primary">
-      {price}
-    </Typography>
-
-    {isAvailable && isInCart && (
-      <Button
-        onClick={() => {
-          setOrders((old_orders) => old_orders.filter((item) => item !== id));
+      <Card
+        variant="none"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          textAlign: "center",
+          padding: 2,
         }}
-        color="info"
-        variant="contained"
-        size="small"
       >
-        Remove
-      </Button>
-    )}
+        <CardMedia
+          component="img"
+          image={isHovered ? hoverImg : img}
+          alt={name}
+          sx={{
+            objectFit: "contain",
+            width: "200%",
+            maxHeight: "90%",
+            transition: "0.3s ease-in-out",
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
 
-    <Link to={`/product/${id}`}>
-      <Button  sx={{ fontSize: 14, color: 'grey', }} 
-      >View</Button>
-      
-    </Link>
-  </CardActions>
-</Card>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 10,
+              display: "flex",
+              alignItems: "center",
+            }}
+            color="text.secondary"
+            gutterBottom
+          ></Typography>
+          <Typography>{name}</Typography>
+          <Typography color="text.secondary" variant="body2">
+            {description}
+          </Typography>
+        </CardContent>
 
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingBottom: 2,
+          }}
+        >
+          <Typography color="text.primary">{price}</Typography>
+
+          {isAvailable && isInCart && (
+            <Button
+              onClick={() =>
+                setOrders(old_orders => old_orders.filter(item => item !== id))
+              }
+              color="info"
+              variant="contained"
+              size="small"
+            >
+              Remove
+            </Button>
+          )}
+
+          <Link to={`/product/${id}`}>
+            <Button sx={{ fontSize: 14, color: "grey" }}>View</Button>
+          </Link>
+        </CardActions>
+      </Card>
     </Box>
   );
- }  
+}
