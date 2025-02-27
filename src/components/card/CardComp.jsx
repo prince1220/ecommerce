@@ -4,31 +4,40 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia"; // Import CardMedia for image handling
+import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { grey } from "@mui/material/colors";
 import { useState } from "react";
 
 export default function CardComp({
-  setOrders, orders, id, name, description, price, isAvailable, img, hoverImg
+  setOrders,
+  orders,
+  id,
+  name,
+  description,
+  price,
+  isAvailable,
+  img,
+  hoverImg,
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [currentHoverImg, setCurrentHoverImg] = useState(hoverImg);
 
-  let isInCart = orders.find(item => item === id) !== undefined;
-  let label, color;
+  const replaceHoverImage = (newImageUrl) => {
+    setCurrentHoverImg(newImageUrl);
+  };
 
-  if (!isAvailable) {
-    label = "Sold out";
-    color = "orange";
-  } else if (isInCart) {
-    label = "In-Cart";
-    color = "red";
-  } else {
-    label = "Available";
-    color = "green";
-  }
+  const isInCart = orders.find((item) => item === id) !== undefined;
+  const label = !isAvailable
+    ? "Sold out"
+    : isInCart
+    ? "In-Cart"
+    : "Available";
+  const color = !isAvailable
+    ? "orange"
+    : isInCart
+    ? "red"
+    : "green";
 
   return (
     <Box
@@ -53,19 +62,26 @@ export default function CardComp({
           padding: 2,
         }}
       >
-        <CardMedia
-          component="img"
-          image={isHovered ? hoverImg : img}
-          alt={name}
-          sx={{
-            objectFit: "contain",
-            width: "200%",
-            maxHeight: "90%",
-            transition: "0.3s ease-in-out",
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        />
+<CardMedia
+  component="img"
+  alt={name}
+  image={isHovered ? currentHoverImg : img} // Use dynamically updated hover image
+  sx={{
+    objectFit: "contain",
+    width: "200%",
+    maxHeight: "90%",
+    transition: "0.3s ease-in-out",
+  }}
+  onMouseEnter={() => {
+    setIsHovered(true);
+    setCurrentHoverImg("https://i.ibb.co/SJ4RZSs/WORKS-Product-Shots-2-copy.png"); // Change image on hover
+  }}
+  onMouseLeave={() => {
+    setIsHovered(false);
+    setCurrentHoverImg(hoverImg); // Reset to original hover image
+  }}
+/>
+
 
         <CardContent
           sx={{
@@ -84,7 +100,9 @@ export default function CardComp({
             }}
             color="text.secondary"
             gutterBottom
-          ></Typography>
+          >
+            {label}
+          </Typography>
           <Typography>{name}</Typography>
           <Typography color="text.secondary" variant="body2">
             {description}
@@ -105,7 +123,9 @@ export default function CardComp({
           {isAvailable && isInCart && (
             <Button
               onClick={() =>
-                setOrders(old_orders => old_orders.filter(item => item !== id))
+                setOrders((oldOrders) =>
+                  oldOrders.filter((item) => item !== id)
+                )
               }
               color="info"
               variant="contained"
@@ -118,8 +138,22 @@ export default function CardComp({
           <Link to={`/product/${id}`}>
             <Button sx={{ fontSize: 14, color: "grey" }}>View</Button>
           </Link>
+
+          <Button
+            onClick={() =>
+              replaceHoverImage("https://i.ibb.co/SJ4RZSs/WORKS-Product-Shots-2-copy.png")    
+            }
+            variant="contained"
+            color="primary"
+            sx={{ marginTop: 2 }}
+          >
+            Change Hover Image Now!
+          </Button>
+          
         </CardActions>
       </Card>
     </Box>
   );
 }
+
+
