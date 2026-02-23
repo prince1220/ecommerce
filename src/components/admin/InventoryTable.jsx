@@ -65,7 +65,12 @@ const headCells = [
     disablePadding: false,
     label: 'Availability',
   },
-  
+  {
+    id: 'discription1',
+    numeric: true,
+    disablePadding: false,
+    label: 'Discription1',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -155,7 +160,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Product
         </Typography>
       )}
 
@@ -187,6 +192,7 @@ export default function InventoryTable({rows,selected,setSelected}) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [visibleRows,setVisibleRows] = React.useState([])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -241,16 +247,16 @@ export default function InventoryTable({rows,selected,setSelected}) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...rows]
+    React.useEffect(()=>{
+      setVisibleRows([...rows]
         .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
+    },[order, orderBy, page, rowsPerPage,rows])
+ 
 
   return (
     <Box sx={{ width: '100%' }}>
+      
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>

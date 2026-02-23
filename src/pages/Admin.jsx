@@ -3,7 +3,7 @@ import CardListAdmin from '../components/admin/CradListAdmin';
 import SearchFilter from '../components/search/SearchFilter';
 import InventoryTable from '../components/admin/InventoryTable';
 import AddProductForm from '../components/admin/AddProductForm';
-
+import DeleteProduct from '../components/admin/DeleteProduct';
 
 
 ////application start cards is empty
@@ -12,6 +12,15 @@ import AddProductForm from '../components/admin/AddProductForm';
 
 export default function Admin({cards,setCards,searchQ,setSearchQ,setPricesRange,pricesRange}) {
   const [selected, setSelected] = React.useState([]);
+
+
+  function deleteProduct(id){
+  fetch("http://localhost:8000/products/"+id, {
+    method: "DELETE",
+    })
+  }
+
+
 
   return (
     <>
@@ -22,13 +31,12 @@ export default function Admin({cards,setCards,searchQ,setSearchQ,setPricesRange,
 
 
    <InventoryTable rows={cards} selected={selected} setSelected={setSelected} />
+  
    <AddProductForm setCards={setCards}/>
+   
+    <DeleteProduct selected={selected}/>
 
-   <button onClick={()=>{
-    setCards(old=>{
-      return old.filter(item=>selected.includes(item)==false)
-    })
-   }}>Delete select</button>
+
   </div>
   </>
   )

@@ -4,7 +4,13 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button";
+import { useCart } from "@reflowhq/cart-react";
 
+import ReactProductSlider from "react-product-slider";
+
+const config = {
+  projectID: "1472176007",
+};
 const currencies = [
   { value: 'small', label: 'S' },
   { value: 'medium', label: 'M' },
@@ -12,14 +18,44 @@ const currencies = [
   { value: 'xlarge', label: 'XL' },
 ];
 
+
+//https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg
+
 export default function Product({ cards, setOrders, orders }) {
   const { id } = useParams();
+  console.log(id)
+  const cart = useCart(config);
 
-  if (!cards) {
+  if (!cards || cards.length == 0) {
     return <div>Getting product details</div>;
   }
 
+
   const product = cards.find(el => el.id == id);
+  console.log(cards)
+  console.log(product)
+  const items = [
+    {
+      src: product.img1,
+      alt: "image 1",
+      thumbnail:product.img1 ,
+    },
+    {
+      src: product.img2,
+      
+      alt: "image 2",
+      thumbnail:product.img2,
+    },
+    {
+      src: product.img3,
+      
+      alt: "image 3",
+      thumbnail: product.img3,
+    },
+  ];
+  
+
+
 
   if (!product) {
     return <div>Product not found</div>;
@@ -27,6 +63,8 @@ export default function Product({ cards, setOrders, orders }) {
 
   let isInCart = orders.find(item => item === id) !== undefined;
   let isAvailable = true; // You can modify this based on actual availability logic
+
+
 
   return (
     <Box
@@ -57,24 +95,11 @@ export default function Product({ cards, setOrders, orders }) {
             display: 'flex',
             flexDirection: 'column',
             gap: '40px',
-            maxWidth: '400px',
+            maxWidth: '800px',
+            
           }}
         >
-          <img
-            src={product.img}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
-          <img
-            src={product.img2}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
-          <img
-            src={product.img3}
-            alt={product.name}
-            style={{ width: '100%', height: 'auto' }}
-          />
+           <ReactProductSlider reverse={true} items={items} />
         </Box>
 
         {/* Product Details and Form */}
@@ -83,6 +108,7 @@ export default function Product({ cards, setOrders, orders }) {
             fontFamily: 'Source Code Pro, monospace',
             flexGrow: 1,
             marginLeft: { sm: '100px' },
+            
           }}
         >
           <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
@@ -113,13 +139,9 @@ export default function Product({ cards, setOrders, orders }) {
           {isAvailable && !isInCart && (
             <Button
             onClick={() => {
-              setOrders((old_orders) => {
-                if (old_orders.find((item) => item === id)) {
-                  return old_orders;
-                } else {
-                  return [...old_orders, id];
-                }
-              });
+            
+             
+              cart.addProduct({id:product.cart_id})
             }}
             color="warning"
             variant="contained"

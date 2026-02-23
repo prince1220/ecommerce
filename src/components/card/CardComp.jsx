@@ -4,26 +4,45 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia"; // Import CardMedia for image handling
+import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { grey } from "@mui/material/colors";
+import { useState, useEffect } from "react";
 
-export default function CardComp({ setOrders, orders, id, name, description, price, isAvailable, img }) {
-  let isInCart = orders.find(item => item === id) !== undefined;
-  let label, color;
 
-  if (!isAvailable) {
-    label = "Sold out";
-    color = "orange";
-  } else if (isInCart) {
-    label = "In-Cart";
-    color = "red";
-  } else {
-    label = "Available";
-    color = "green";
-  }
+
+
+export default function CardComp({
+  setOrders,
+  orders,
+  id,
+  name,
+  description,
+  price,
+  isAvailable,
+  img,
+  hoverImg,
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // ✅ Define a fallback hover image
+  const fallbackHoverImg =
+    "https://i.ibb.co/Gt602dh/WORKS-Product-Shots-2.png";
+
+  const imageToUseOnHover = hoverImg || fallbackHoverImg;
+
+  // ✅ Preload hover image (corrected syntax)
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = imageToUseOnHover;
+  }, [imageToUseOnHover]);
+
+  const isInCart = orders.find((item) => item === id) !== undefined;
+  const label = !isAvailable
+    ? "Sold out"
+    : isInCart
+    ? "In-Cart"
+    : "Available";
 
   return (
     <Box
@@ -33,87 +52,88 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
         height: 600,
         margin: 10,
         paddingLeft: 23,
-        fontFamily: "'Source Code Pro Variable', monospace", // Apply font family to the entire card
+        fontFamily: "'Source Code Pro Variable', monospace",
       }}
     >
-      <Card variant="outlined">
-        <React.Fragment>
-          {/* Image Component */}
-          <CardMedia
-            component="img"
-            height="600" // Adjust the height as needed
-            image={img} // Use the img prop to set the image source
-            alt={name} // Use the name prop for the alt text
-            sx={{
-              objectFit: "contain", // Ensures the image covers the container without distortion
-              width: "100%", // Ensures the image takes up the full width of the container
-            }}
-          />
-          
-          <CardContent>
-            <Typography
-              sx={{
-                fontSize: 10,
-                display: "flex",
-                alignItems: "center",
-              }}
-              color="text.secondary"
-              gutterBottom
+      <Card
+        variant="none"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          textAlign: "center",
+          padding: 2,
+        }}
+      >
+        <CardMedia
+          component="img"
+          alt={name}
+          image={isHovered ? imageToUseOnHover : img}
+          sx={{
+            objectFit: "contain",
+            width: "200%",
+            maxHeight: "90%",
+            transition: "0.3s ease-in-out",
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
+
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            sx={{ fontSize: 10, display: "flex", alignItems: "center" }}
+            color="text.secondary"
+            gutterBottom
+          >
+            {label}
+          </Typography>
+          <Typography>{name}</Typography>
+          <Typography color="text.secondary" variant="body2">
+            {description}
+          </Typography>
+        </CardContent>
+
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingBottom: 2,
+          }}
+        >
+          <Typography color="text.primary">{price}</Typography>
+
+          {isAvailable && isInCart && (
+            <Button
+              onClick={() =>
+                setOrders((oldOrders) =>
+                  oldOrders.filter((item) => item !== id)
+                )
+              }
+              color="info"
+              variant="contained"
+              size="small"
             >
-              {/* {label} <FiberManualRecordIcon style={{ color: grey, height: 50, width: 10 }} /> */}
-            </Typography>
-            <Typography variant="h7" component="div">
-              {name}
-            </Typography>
-            <Typography color="text.secondary" variant="body2">
-              {description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Typography color="#fffff" variant="h8">
-              {price}
-            </Typography>
-  
-            {/* {isAvailable && !isInCart && (
-              <Button
-                onClick={() => {
-                  setOrders((old_orders) => {
-                    if (old_orders.find((item) => item === id)) {
-                      return old_orders;
-                    } else {
-                      return [...old_orders, id];
-                    }
-                  });
-                }}
-                color="warning"
-                variant="contained"
-                size="small"
-              >
-                Add
-              </Button>
-            )} */}
-  
-            {isAvailable && isInCart && (
-              <Button
-                onClick={() => {
-                  setOrders((old_orders) => {
-                    return old_orders.filter((item) => item !== id);
-                  });
-                }}
-                color="info"
-                variant="contained"
-                size="small"
-              >
-                Remove
-              </Button>
-            )}
-  
-            <Link to={"/product/" + id}>
-              <Button>View</Button>
-            </Link>
-          </CardActions>
-        </React.Fragment>
+              Remove
+            </Button>
+          )}
+
+          <Link to={`/product/${id}`}>
+            <Button sx={{ fontSize: 14, color: "grey" }}>View</Button>
+          </Link>
+        </CardActions>
       </Card>
     </Box>
   );
- }  
+}

@@ -1,77 +1,76 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import { useCart } from "@reflowhq/cart-react";
+import CartView from "@reflowhq/cart-react";
+import "@reflowhq/cart-react/dist/style.css";
+import { useState } from 'react';
+const isInArray = (arr, id) => {
+  return arr.includes(id);
+};
+
+const config = {
+  projectID: "1472176007",
+};
 
 function Cart({ cards, orders, setOrders }) {
-  const isInArray = (arr, id) => {
-    return arr.includes(id);
-  };
+
+  
+  const cart = useCart(config);
 
   const filteredCards = cards.filter(item => isInArray(orders, item.id));
   const totalAmount = filteredCards.reduce((total, card) => total + parseFloat(card.price), 0);
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      p={2}
-      sx={{ border: 'none', width: '100%' }}
-    >
-      <h1 style={{ margin: 0, marginBottom: '20px' }}>Cart</h1>
+    display="flex"
+    flexDirection="column"
+    p={2}
+    sx={{
+      border: 'none',
+      width: '100%', // Full width of the page
+      maxWidth: '900px', // Set a max-width to center it better
+      paddingLeft: '5px',  // Padding on the left
+      paddingRight: '5px', // Padding on the right
+      position: 'fixed',   // Make the container fixed to the page
+      top: 100,              // Align to the top of the page
+      left: '50%',         // Center horizontally
+      transform: 'translateX(-50%)', // Proper centering using transform
+      fontFamily: "'Source Code Pro Variable', monospace",
+      zIndex: 1000,        // Ensure it's above other content if needed
+    }}
+  >
+  
+      <h1 style={{ textAlign: 'center', margin: 0, marginBottom: '20px' }}>
+        CART
+      </h1>
 
-      <Box
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-between"
-        gap={2}
-      >
-        <Box
-          display="flex"
-          flexDirection="column"
-          gap={2}
-          sx={{ width: '60%' }}
-        >
-          {filteredCards.map(card => (
-            <Box 
-              key={card.id} 
-              p={2} 
-              sx={{ 
-                border: '1px solid grey', 
-                width: '100%', 
-                borderRadius: '8px' // Rounded corners
-              }}
-            >
-              <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Box>
-                  <h2>{card.name}</h2>
-                  <p>{card.description}</p>
-                  <p>{card.price}</p>
-                  <p>{card.isAvailable === "true" ? "Available" : "Not Available"}</p>
-                </Box>
-                <button onClick={() => setOrders(orders.filter(orderId => orderId !== card.id))}>
-                  Remove from Cart
-                </button>
-              </Box>
-            </Box>
-          ))}
-        </Box>
+      {/* CartView */}
+      <CartView
+        cart={cart}
+        successURL={"https://i.ibb.co/7XwHMJW/Untitled-2-01.png"}
+        cancelURL={"https://i.ibb.co/TwCSxF5/WORKS-Product-Shots-3.png"}
+        onMessage={(message) => {
+          console.log(message.type, message.title, message.description);
+        }}
+      />
 
-        <Box
-          p={2}
-          sx={{
-            border: '1px solid grey',
-            width: '35%',
-            textAlign: 'center',
-            alignSelf: 'flex-start',
-            borderRadius: '8px' // Rounded corners
-          }}
-        >
-          <h3>Order Summary</h3>
-          <p>Total Items: {filteredCards.length}</p>
-          <p>Total Price: ${totalAmount.toFixed(2)}</p>
-        </Box>
-      </Box>
+      {/* Add product to cart for testing */}
+      {/* <button onClick={() => cart.addProduct({ id: "1404857296" })}>Add to cart</button> */}
     </Box>
   );
 }
 
 export default Cart;
+/*<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6727f8b82480f5b4f598264f/1ibq27407';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->*/
