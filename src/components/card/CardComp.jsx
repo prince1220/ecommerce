@@ -7,7 +7,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
+
 
 export default function CardComp({
   setOrders,
@@ -21,11 +24,18 @@ export default function CardComp({
   hoverImg,
 }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [currentHoverImg, setCurrentHoverImg] = useState(hoverImg);
 
-  const replaceHoverImage = (newImageUrl) => {
-    setCurrentHoverImg(newImageUrl);
-  };
+  // ✅ Define a fallback hover image
+  const fallbackHoverImg =
+    "https://i.ibb.co/Gt602dh/WORKS-Product-Shots-2.png";
+
+  const imageToUseOnHover = hoverImg || fallbackHoverImg;
+
+  // ✅ Preload hover image (corrected syntax)
+  useEffect(() => {
+    const preloadImage = new Image();
+    preloadImage.src = imageToUseOnHover;
+  }, [imageToUseOnHover]);
 
   const isInCart = orders.find((item) => item === id) !== undefined;
   const label = !isAvailable
@@ -33,11 +43,6 @@ export default function CardComp({
     : isInCart
     ? "In-Cart"
     : "Available";
-  const color = !isAvailable
-    ? "orange"
-    : isInCart
-    ? "red"
-    : "green";
 
   return (
     <Box
@@ -62,26 +67,19 @@ export default function CardComp({
           padding: 2,
         }}
       >
-<CardMedia
-  component="img"
-  alt={name}
-  image={isHovered ? currentHoverImg : img} // Use dynamically updated hover image
-  sx={{
-    objectFit: "contain",
-    width: "200%",
-    maxHeight: "90%",
-    transition: "0.3s ease-in-out",
-  }}
-  onMouseEnter={() => {
-    setIsHovered(true);
-    setCurrentHoverImg("https://i.ibb.co/SJ4RZSs/WORKS-Product-Shots-2-copy.png"); // Change image on hover
-  }}
-  onMouseLeave={() => {
-    setIsHovered(false);
-    setCurrentHoverImg(hoverImg); // Reset to original hover image
-  }}
-/>
-
+        <CardMedia
+          component="img"
+          alt={name}
+          image={isHovered ? imageToUseOnHover : img}
+          sx={{
+            objectFit: "contain",
+            width: "200%",
+            maxHeight: "90%",
+            transition: "0.3s ease-in-out",
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        />
 
         <CardContent
           sx={{
@@ -93,11 +91,7 @@ export default function CardComp({
           }}
         >
           <Typography
-            sx={{
-              fontSize: 10,
-              display: "flex",
-              alignItems: "center",
-            }}
+            sx={{ fontSize: 10, display: "flex", alignItems: "center" }}
             color="text.secondary"
             gutterBottom
           >
@@ -138,22 +132,8 @@ export default function CardComp({
           <Link to={`/product/${id}`}>
             <Button sx={{ fontSize: 14, color: "grey" }}>View</Button>
           </Link>
-
-          <Button
-            onClick={() =>
-              replaceHoverImage("https://i.ibb.co/SJ4RZSs/WORKS-Product-Shots-2-copy.png")    
-            }
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 2 }}
-          >
-            Change Hover Image Now!
-          </Button>
-          
         </CardActions>
       </Card>
     </Box>
   );
 }
-
-
