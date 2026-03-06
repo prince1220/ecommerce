@@ -1,181 +1,152 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 import { useCart } from "@reflowhq/cart-react";
 
-import ReactProductSlider from "react-product-slider";
-
-const config = {
-  projectID: "1472176007",
-};
-const currencies = [
-  { value: 'small', label: 'S' },
-  { value: 'medium', label: 'M' },
-  { value: 'large', label: 'L' },
-  { value: 'xlarge', label: 'XL' },
-];
-
-
-//https://thirdeyemom.com/wp-content/uploads/2017/08/img_2197.jpg
+const config = { projectID: "1472176007" };
+const sizes = ['Small', 'Medium', 'Large', 'Extra Large', '2XL'];
 
 export default function Product({ cards, setOrders, orders }) {
   const { id } = useParams();
-  console.log(id)
+  const navigate = useNavigate(); // 2. Initialize the navigate function
   const cart = useCart(config);
+  const [selectedSize, setSelectedSize] = useState('Small');
 
-  if (!cards || cards.length == 0) {
-    return <div>Getting product details</div>;
+  if (!cards || cards.length === 0) {
+    return <Box sx={{ p: 4, fontFamily: 'monospace' }}>Getting product details...</Box>;
   }
-
 
   const product = cards.find(el => el.id == id);
-  console.log(cards)
-  console.log(product)
-  const items = [
-    {
-      src: product.img1,
-      alt: "image 1",
-      thumbnail:product.img1 ,
-    },
-    {
-      src: product.img2,
-      
-      alt: "image 2",
-      thumbnail:product.img2,
-    },
-    {
-      src: product.img3,
-      
-      alt: "image 3",
-      thumbnail: product.img3,
-    },
-  ];
-  
+  if (!product) return <Box sx={{ p: 4, fontFamily: 'monospace' }}>Product not found</Box>;
 
-
-
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
-  let isInCart = orders.find(item => item === id) !== undefined;
-  let isAvailable = true; // You can modify this based on actual availability logic
-
-
+  // Function to handle adding to both Reflow and your local state
+  const handleAddToCart = () => {
+    cart.addProduct({ id: product.cart_id });
+    // Update local state if the item isn't already in the orders array
+    if (!orders.includes(product.id)) {
+      setOrders([...orders, product.id]);
+    }
+  };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-      }}
-    >
-      <Box
-        component="form"
-        sx={{
-          fontFamily: "'Source Code Pro Variable', monospace",
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { sm: 'flex-start' },
-          justifyContent: 'space-between',
-          paddingTop: '100px',
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        {/* Image Column */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '40px',
-            maxWidth: '800px',
-            
-          }}
-        >
-           <ReactProductSlider reverse={true} items={items} />
+    <Box sx={{ 
+      backgroundColor: '#fff', 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column',
+      fontFamily: "'Source Code Pro', monospace" 
+    }}>
+      
+      <Box sx={{ 
+        display: 'grid', 
+        gridTemplateColumns: { xs: '1fr', md: '1.2fr 1fr' },
+        borderTop: '1px solid #e0e0e0'
+      }}>
+        
+        {/* Left Column: Images */}
+        <Box sx={{ borderRight: '1px solid #e0e0e0', padding: '0px' }}>
+          {[product.img1, product.img2, product.img3].map((img, index) => (
+            <Box key={index} sx={{ 
+              borderBottom: '1px solid #e0e0e0', 
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              p: 4
+            }}>
+              <img src={img} alt={`Product ${index}`} style={{ width: '100%', maxWidth: '600px', height: 'auto' }} />
+            </Box>
+          ))}
         </Box>
 
-        {/* Product Details and Form */}
-        <Box
-          sx={{
-            fontFamily: 'Source Code Pro, monospace',
-            flexGrow: 1,
-            marginLeft: { sm: '100px' },
-            
-          }}
-        >
-          <h1 style={{ marginBottom: '40px' }}>{product.name}</h1>
-          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.price}</p>
-          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription1}</p>
-          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription2}</p>
-          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription3}</p>
-          <p style={{ marginBottom: '40px', fontWeight: 400 }}>{product.discription4}</p>
+        {/* Right Column: Sticky Details */}
+        <Box sx={{ padding: '40px', position: 'sticky', top: 0, height: 'fit-content' }}>
+          
+          <Box sx={{ backgroundColor: '#eeeeee', p: 1, mb: 2, border: '1px solid #e0e0e0' }}>
+            <Typography sx={{ fontSize: '14px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              {product.name}
+            </Typography>
+          </Box>
+          
+          <Typography sx={{ fontWeight: '300',fontSize: '14px', mb: 4 }}> {product.price}</Typography>
 
-          {/* TextField components */}
-          <div style={{ marginBottom: '16px' }}>
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Size"
-              defaultValue="small"
-              helperText="Please select your size"
-            >
-              {currencies.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
+          {/* Size Selection */}
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 4 }}>
+            {sizes.map((size) => (
+              <Button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                sx={{
+                  borderRadius: 0,
+                  border: '1px solid #e0e0e0',
+                  color: selectedSize === size ? '#fff' : '#000',
+                  backgroundColor: selectedSize === size ? '#000' : 'transparent',
+                  fontFamily: 'inherit',
+                  fontWeight: '400',
+                  fontSize: '12px',
+                  padding: '5px 15px',
+                  '&:hover': { backgroundColor: selectedSize === size ? '#333' : '#f5f5f5', borderColor: '#000' }
+                }}
+              >
+                {size}
+              </Button>
+            ))}
+          </Box>
 
-          {/* Conditional Button Rendering */}
-          {isAvailable && !isInCart && (
-            <Button
-            onClick={() => {
-            
-             
-              cart.addProduct({id:product.cart_id})
-            }}
-            color="warning"
-            variant="contained"
-            size="small"
+          {/* ADD TO CART */}
+          <Button
+            fullWidth
+            onClick={handleAddToCart} // Using the combined function
             sx={{
-              fontFamily: "'Source Code Pro Variable', monospace",
-              backgroundColor: '#FFFFFF', // Background color
-              color: '#757575', // Text color
-              border: '1px solid #757575', // Outline color and thickness
-              '&:hover': {
-                backgroundColor: '#FAFAFA', // Lighter background shade on hover
-                color: '#FAFAFA', // Text color on hover
-                borderColor: '#757575', // Darker outline on hover
-              },
+              borderRadius: 0,
+              backgroundColor: '#000',
+              color: '#fff',
+              p: 2,
+              mb: 2,
+              fontFamily: 'inherit',
+              fontWeight: '300',
+              '&:hover': { backgroundColor: '#333' }
             }}
           >
-            Add to Cart
+            ADD TO CART
           </Button>
-          )}
 
-          {isAvailable && isInCart && (
-            <Button
-              onClick={() => {
-                setOrders((old_orders) => {
-                  return old_orders.filter((item) => item !== id);
-                });
-              }}
-              color="info"
-              variant="contained"
-              size="small"
-            >
-              Remove
-            </Button>
-          )}
+          {/* CHECKOUT - Linked to /cart */}
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={() => navigate('/cart')} // 3. Programmatic navigation
+            sx={{
+              borderRadius: 0,
+              borderColor: '#e0e0e0',
+              color: '#000',
+              p: 2,
+              mb: 6,
+              fontFamily: 'inherit',
+              fontWeight: '300',
+              '&:hover': { borderColor: '#000', backgroundColor: 'transparent' }
+            }}
+          >
+            CHECKOUT
+          </Button>
+
+          {/* Description */}
+          <Typography sx={{ fontSize: '13px', fontWeight: 'bold', mb: 2 }}>Product Description</Typography>
+          <Box component="ul" sx={{ fontSize: '12px', pl: 2, lineHeight: 2, color: '#333' }}>
+            <li>{product.description1}</li>
+            <li>{product.description2}</li>
+            <li>{product.description3}</li>
+            <li>MADE IN HAITI</li>
+          </Box>
+          
+          <Typography 
+            sx={{ mt: 4, fontSize: '11px', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={() => navigate('/')} // Navigate home
+          >
+            BACK TO SHOP
+          </Typography>
         </Box>
       </Box>
     </Box>

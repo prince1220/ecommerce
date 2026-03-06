@@ -31,8 +31,8 @@ const products = [
   },
   {
     id: 4,
-    name: "TECH-9",
-    description: "Tech-9 Tee",
+    name: "TECH 9",
+    description: "Tech 9 Tee",
     price: "$35",
     isAvailable: true,
     img: "https://i.ibb.co/cYZnMwx/Untitled.png",

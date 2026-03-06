@@ -1,0 +1,56 @@
+/* CartStyles.css */
+
+/* 1. Remove default shadows and add clean borders */
+.custom-reflow-cart .reflow-cart-item {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  margin-bottom: 20px !important;
+  padding: 15px !important;
+  box-shadow: none !important;
+  display: flex !important;
+}
+
+/* 2. Image styling: boxed and grayscale */
+.custom-reflow-cart .reflow-cart-item-image {
+  width: 120px !important;
+  height: 120px !important;
+  border: 1px solid #e0e0e0 !important;
+  padding: 10px !important;
+  background: #fff !important;
+}
+
+/* 3. Text styling: All Caps and Monospace */
+.custom-reflow-cart .reflow-cart-item-name {
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+  letter-spacing: 1px !important;
+  font-size: 14px !important;
+}
+
+/* 4. Quantity and Buttons: Boxy/Minimalist */
+.custom-reflow-cart .reflow-quantity-widget {
+  border-radius: 0 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.custom-reflow-cart .reflow-remove-button {
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #000 !important;
+}
+
+.custom-reflow-cart .reflow-remove-button:hover {
+  border-color: #000 !important;
+}
+
+/* 5. Checkout Button */
+.custom-reflow-cart .reflow-checkout-button {
+  border-radius: 0 !important;
+  background: #000 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-weight: 300 !important;
+}

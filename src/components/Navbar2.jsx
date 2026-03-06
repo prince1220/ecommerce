@@ -1,120 +1,217 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import { Menu } from '@mui/material';
-import Badge from '@mui/material/Badge';
-import { Button } from '@mui/material';
+import { IconButton, Menu, Badge, Button, MenuItem, Typography, Box } from '@mui/material';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
-import MenuItem from '@mui/material/MenuItem';
-import { Typography } from '@mui/material';
-import Box from '@mui/material/Box';
+import SearchIcon from '@mui/icons-material/Search'; 
 import { useCart } from "@reflowhq/cart-react";
 
 // Import your logo image
-import logo from '../logo.png'; // Adjust the path as needed
+import logo from '../logo.png'; 
 
-const pages = [{ name: 'Home', route: "/" },{ name: 'Build', route: "/build" }, { name: 'Contact', route: "/contact" }, { name: 'About', route: "/about" }, { name: 'Cart', route: "/cart" } ];
-const config = {
-  projectID: "1472176007",
-};
-export default function Navbar2({ cards, orders, setOrders }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
- const cart = useCart(config);
+const pages = [
+  { name: 'SHOP', route: "#", hasDropdown: true }, // Added flag for dropdown
+  { name: 'BUILD', route: "/build" }, 
+  { name: 'CONTACT', route: "/contact" }, 
+  { name: 'ABOUT', route: "/about" }
+];
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+const config = { projectID: "1472176007" };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+export default function Navbar2() {
+  const [anchorElCart, setAnchorElCart] = React.useState(null);
+  const [anchorElShop, setAnchorElShop] = React.useState(null); // State for Shop menu
+  const cart = useCart(config);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  const handleOpenCartMenu = (event) => setAnchorElCart(event.currentTarget);
+  const handleCloseCartMenu = () => setAnchorElCart(null);
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-
- 
+  const handleOpenShopMenu = (event) => setAnchorElShop(event.currentTarget);
+  const handleCloseShopMenu = () => setAnchorElShop(null);
 
   return (
     <Box
       sx={{
-        fontFamily: "'Source Code Pro Variable', monospace",
-        display: 'flex',
-        justifyContent: 'space-between', // Distributes space evenly between items
+        fontFamily: "'Source Code Pro', monospace",
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
-        padding: '0 20px', // Adds some padding on the left and right
-        height: '10vh', // Optional: adjust the height of the navbar
-        backgroundColor: '#f8f9fa', // Optional: add a background color to the navbar
+        borderBottom: '1px solid #e0e0e0',
+        backgroundColor: '#fff',
+        width: '100%',
+        zIndex: 1100,
+        position: 'relative'
       }}
     >
-      {/* Logo */}
-      <Box>
-        <Link to="/">
-          <img src={logo} alt="Logo" style={{ height: '50px' }} />
-        </Link>
-      </Box>
-
-      {/* Links */}
-      <Box sx={{ display: 'flex', gap: 2 }}>
+      {/* Left Section: Navigation Links */}
+      <Box sx={{ display: 'flex', height: '100%' }}>
         {pages.map((page) => (
-          <Link key={page.name} to={page.route} style={{ textDecoration: 'none', color: 'inherit', margin: '0 10px' }}>
-            {page.name}
-          </Link>
+          page.hasDropdown ? (
+            <Box 
+              key={page.name}
+              onClick={handleOpenShopMenu}
+              sx={{ 
+                cursor: 'pointer',
+                color: '#000', 
+                fontSize: '13px',
+                letterSpacing: '1px',
+                padding: '20px 25px',
+                borderRight: '1px solid #e0e0e0',
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: Boolean(anchorElShop) ? '#eeeeee' : 'transparent', // Match Home button gray
+                transition: '0.2s'
+              }}
+            >
+              {page.name}
+            </Box>
+          ) : (
+            <Link 
+              key={page.name} 
+              to={page.route} 
+              style={{ 
+                textDecoration: 'none', 
+                color: '#000', 
+                fontSize: '13px',
+                letterSpacing: '1px',
+                padding: '20px 25px',
+                borderRight: '1px solid #e0e0e0',
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              {page.name}
+            </Link>
+          )
         ))}
       </Box>
 
-      {/* Cart Icon */}
-      <Box>
-        <IconButton onClick={handleOpenUserMenu} size="large" aria-label="show cart items" color="inherit">
-          <Badge badgeContent={cart.products.length} color="error">
-            <ShoppingCartSharpIcon />
-          </Badge>
-        </IconButton>
-
-        <Menu
-          sx={{ mt: '45px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+      {/* Shop Dropdown Menu */}
+      <Menu
+        anchorEl={anchorElShop}
+        open={Boolean(anchorElShop)}
+        onClose={handleCloseShopMenu}
+        disableScrollLock={true}
+        PaperProps={{
+          sx: {
+            borderRadius: 0,
+            border: '1px solid #e0e0e0',
+            boxShadow: 'none',
+            mt: '0px',
+            '& .MuiList-root': { padding: 0 }
+          }
+        }}
+      >
+        <MenuItem 
+          component={Link} 
+          to="/season-1" 
+          onClick={handleCloseShopMenu}
+          sx={{ 
+            fontFamily: "'Source Code Pro', monospace", 
+            fontSize: '12px', 
+            padding: '12px 30px',
+            borderBottom: '1px solid #eee',
+            '&:hover': { backgroundColor: '#eeeeee' }
           }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
         >
-          {cart.products.map((product) => {
-  
-            
-            return (
-              <MenuItem 
-             
-              
-              onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" style={{display:"flex",gap:20,alignItems:"center",justifyContent:"space-around"}}>
-                  <div>{product.name}</div> <div>{product.price} </div> <img width={64}  src={product.img1} />
-                  <Button onClick={() => {
-                    cart.removeLineItem(product.lineItemID)
-                  }}>
-                    Delete
-                </Button>
-                </Typography>
-              </MenuItem>
-            );
-          })}
-        </Menu>
+          SEASON_1
+        </MenuItem>
+        <MenuItem 
+  component={Link}       // Tells MUI to use React Router's Link behavior
+  to="/season-2"         // The URL destination
+  onClick={handleCloseShopMenu} // Closes the dropdown when clicked
+  sx={{ 
+    fontFamily: "'Source Code Pro', monospace", 
+    fontSize: '12px', 
+    padding: '12px 30px',
+    '&:hover': { backgroundColor: '#eeeeee' }
+  }}
+>
+  SEASON_2
+</MenuItem>
+      </Menu>
+
+      {/* Center Section: Logo */}
+      <Box sx={{ padding: '10px 40px', borderRight: '1px solid #e0e0e0', borderLeft: '1px solid #e0e0e0' }}>
+        <Link to="/">
+          <img src={logo} alt="Logo" style={{ height: '50px', filter: 'grayscale(1)' }} />
+        </Link>
       </Box>
+
+      {/* Right Section: Search and Cart */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '100%', gap: 0 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          padding: '0 20px', 
+          fontSize: '13px', 
+          letterSpacing: '1px',
+          height: '100%',
+          borderLeft: '1px solid #e0e0e0',
+          cursor: 'pointer'
+        }}>
+          <SearchIcon sx={{ fontSize: 18, mr: 1 }} /> SEARCH
+        </Box>
+        
+        <Box 
+          onClick={handleOpenCartMenu}
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            padding: '0 25px', 
+            fontSize: '13px', 
+            letterSpacing: '1px',
+            height: '100%',
+            borderLeft: '1px solid #e0e0e0',
+            cursor: 'pointer'
+          }}
+        >
+          <Badge 
+            badgeContent={cart.products.length} 
+            sx={{ 
+              '& .MuiBadge-badge': { 
+                backgroundColor: '#000', 
+                color: '#fff',
+                fontFamily: 'monospace',
+                borderRadius: '0px'
+              } 
+            }}
+          >
+            <ShoppingCartSharpIcon sx={{ fontSize: 20 }} />
+          </Badge>
+          <Typography sx={{ ml: 1, fontSize: '13px', fontFamily: 'inherit' }}>CART</Typography>
+        </Box>
+      </Box>
+
+      {/* Cart Menu Styling */}
+      <Menu
+        anchorEl={anchorElCart}
+        open={Boolean(anchorElCart)}
+        onClose={handleCloseCartMenu}
+        PaperProps={{
+          sx: {
+            borderRadius: 0,
+            border: '1px solid #000',
+            boxShadow: 'none',
+            mt: 1
+          }
+        }}
+      >
+        {cart.products.map((product) => (
+          <MenuItem key={product.lineItemID} onClick={handleCloseCartMenu} sx={{ borderBottom: '1px solid #eee' }}>
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', fontFamily: 'monospace' }}>
+              <img width={40} src={product.img1} alt={product.name} />
+              <Typography sx={{ fontSize: '12px' }}>{product.name}</Typography>
+              <Typography sx={{ fontSize: '12px', fontWeight: 'bold' }}>{product.price}</Typography>
+              <Button 
+                onClick={(e) => { e.stopPropagation(); cart.removeLineItem(product.lineItemID); }}
+                sx={{ color: 'red', fontSize: '10px' }}
+              >
+                [X]
+              </Button>
+            </Box>
+          </MenuItem>
+        ))}
+      </Menu>
     </Box>
   );
 }

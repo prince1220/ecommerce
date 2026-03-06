@@ -35,12 +35,12 @@ function Cart({ cards, orders, setOrders }) {
       top: 100,              // Align to the top of the page
       left: '50%',         // Center horizontally
       transform: 'translateX(-50%)', // Proper centering using transform
-      fontFamily: "'Source Code Pro Variable', monospace",
+      fontFamily: "'Source Code Pro', monospace",
       zIndex: 1000,        // Ensure it's above other content if needed
     }}
   >
   
-      <h1 style={{ textAlign: 'center', margin: 0, marginBottom: '20px' }}>
+      <h1 style={{ textAlign: 'left', margin: 0, marginBottom: '20px' }}>
         CART
       </h1>
 
