@@ -4,26 +4,34 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 export default function CardComp({ setOrders, orders, id, name, description, price, isAvailable, img }) {
-  // Logic to check if item is in cart
   const isInCart = orders.find(item => item === id) !== undefined;
 
   return (
     <Box
+      className="product-card" // Added class for targeting
       sx={{
         width: "100%",
-        maxWidth: "500px", // Limits width to allow gaps in a 3-column setup
+        maxWidth: "500px",
+        mx: "auto",
         fontFamily: "'Source Code Pro', monospace",
-        border: "1px solid #e0e0e0",
         backgroundColor: "#fff",
         position: "relative",
+        display: "flex",
+        flexDirection: "column",
         transition: "transform 0.2s ease-in-out, border-color 0.2s",
         "&:hover": {
           borderColor: "#000",
-          transform: "translateY(-4px)" // Subtle lift on hover
+          transform: "translateY(-4px)",
+          // This targets the name Typography when the parent Box is hovered
+          "& .product-name": {
+            backgroundColor: "#b3b3b3",
+            color: "#fff",
+            padding: "0 4px",
+          }
         }
       }}
     >
-      {/* Status Label (Sold Out) */}
+      {/* ... Status Label remains the same ... */}
       {!isAvailable && (
         <Box sx={{
           position: "absolute",
@@ -40,39 +48,37 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
         </Box>
       )}
 
-      {/* Image Container */}
+      {/* ... Image Container remains the same ... */}
       <Link to={"/product/" + id} style={{ textDecoration: 'none' }}>
         <Box sx={{ 
-          height: 600, // Large image height as requested
+          height: 500, 
           display: "flex", 
           alignItems: "center", 
           justifyContent: "center",
           p: 2,
-          borderBottom: "1px solid #e0e0e0",
           overflow: "hidden"
         }}>
           <img 
             src={img} 
             alt={name} 
-            style={{ 
-              maxWidth: "100%", 
-              maxHeight: "100%", 
-              objectFit: "contain" 
-            }} 
+            style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} 
           />
         </Box>
       </Link>
 
-      {/* Content Section */}
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1 }}>
           <Typography 
+            className="product-name" // Added class for the hover effect
             sx={{ 
               fontSize: "13px", 
               fontWeight: "bold", 
               textTransform: "uppercase",
               letterSpacing: "1px",
-              fontFamily: "inherit"
+              fontFamily: "inherit",
+              textAlign: "left",
+              transition: "0.2s ease-in-out", // Smooth transition for the highlight
+              display: "inline-block" // Ensures the background highlight wraps tightly
             }}
           >
             {name}
@@ -80,13 +86,15 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
           <Typography 
             sx={{ 
               fontSize: "13px", 
-              fontFamily: "inherit" 
+              fontFamily: "inherit",
+              textAlign: "right" 
             }}
           >
             {price}
           </Typography>
         </Box>
 
+        {/* ... Rest of the component (Description and Action Area) remains the same ... */}
         <Typography 
           sx={{ 
             fontSize: "11px", 
@@ -94,14 +102,14 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
             mb: 2,
             fontFamily: "inherit",
             lineHeight: 1.4,
-            height: "32px", // Fixed height to keep buttons aligned
-            overflow: "hidden"
+            height: "28px", 
+            overflow: "hidden",
+            textAlign: "left"
           }}
         >
           {description}
         </Typography>
 
-        {/* Action area */}
         <Box sx={{ display: "flex", borderTop: "1px solid #e0e0e0", mx: -2, mt: 1 }}>
           <Link 
             to={"/product/" + id} 
@@ -112,7 +120,6 @@ export default function CardComp({ setOrders, orders, id, name, description, pri
               textDecoration: "none", 
               color: "#000",
               fontSize: "12px",
-              borderRight: "1px solid #e0e0e0",
               textTransform: "uppercase"
             }}
           >

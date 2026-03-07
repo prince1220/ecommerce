@@ -38,6 +38,7 @@ const products = [
     img: "https://i.ibb.co/cYZnMwx/Untitled.png",
     hoverImg: "https://i.ibb.co/Gt602dh/WORKS-Product-Shots-2.png",
   },
+  
 ];
 
 export default function ProductList() {
